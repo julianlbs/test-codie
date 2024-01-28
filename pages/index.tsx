@@ -30,21 +30,14 @@ const Main = styled.main`
 	position: relative;
 `;
 
+const head = (
+	<Head
+		title="Centro Pokémon - Página Inicial"
+		description="Cuidamos bem do seu pokémon, para ele cuidar bem de você"
+	/>
+);
+
 export default function Home() {
-	const [pageUrl, setPageUrl] = React.useState("");
-
-	const head = (
-		<Head
-			title="Centro Pokémon"
-			description="Cuidamos bem do seu pokémon, para ele cuidar bem de você"
-			pageUrl={pageUrl}
-		/>
-	);
-
-	React.useEffect(() => {
-		setPageUrl(window.location.href);
-	}, []);
-
 	return (
 		<MainLayout head={head}>
 			<Main>

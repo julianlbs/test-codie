@@ -6,11 +6,16 @@ interface HeadProps {
 	title: string;
 	description: string;
 	favicon?: string;
-	pageUrl?: string;
 }
 
 export default function Head(props: HeadProps) {
-	const { children, title, description, pageUrl, favicon } = props;
+	const { children, title, description, favicon } = props;
+
+	const [pageUrl, setPageUrl] = React.useState("");
+
+	React.useEffect(() => {
+		setPageUrl(window.location.href);
+	}, []);
 
 	return (
 		<NextHead>
