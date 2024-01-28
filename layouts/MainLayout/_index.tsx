@@ -1,9 +1,8 @@
 import React, { type ReactNode } from "react";
 import styled from "styled-components";
 import StyledBrandLogo from "@/components/ui/misc/BrandLogo";
-import Header from "@/components/layout/Header/_index";
 import Footer from "@/components/layout/Footer/_index";
-import Nav from "@/components/layout/Nav/_index";
+import Nav from "@/components/layout/NavBar/_index";
 
 interface MainLayoutProps {
 	children: ReactNode;
@@ -28,12 +27,12 @@ export default function MainLayout(props: MainLayoutProps) {
 	return (
 		<Container>
 			{head}
-			<Header.Root>
+			<Nav.Root>
 				<StyledBrandLogo />
-				<Nav.Root>
-					<Nav.ListItems />
-				</Nav.Root>
-			</Header.Root>
+				<Nav.Menu>
+					<Nav.MenuItems />
+				</Nav.Menu>
+			</Nav.Root>
 			{children}
 			<Footer.Root>
 				<FooterText>

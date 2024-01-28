@@ -1,7 +1,7 @@
 import React, { type ReactNode } from "react";
 import styled from "styled-components";
 
-interface NavRootProps {
+interface NavMenuProps {
 	children: ReactNode;
 }
 
@@ -11,7 +11,7 @@ const Wrapper = styled.nav`
 	gap: 2rem;
 `;
 
-export default function NavRoot(props: NavRootProps) {
+export default function NavMenu(props: NavMenuProps) {
 	const { children } = props;
 	return <Wrapper>{children}</Wrapper>;
 }

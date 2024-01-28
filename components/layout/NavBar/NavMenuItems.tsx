@@ -4,6 +4,10 @@ import useWindowSize from "@/hooks/useWindowSize";
 import Hamburger from "hamburger-react";
 import styled from "styled-components";
 
+interface NavMenuItemsProps {
+	items?: ReactNode;
+}
+
 const Wrapper = styled.div``;
 
 const MobileItemsWrapper = styled.div<{
@@ -35,14 +39,18 @@ const MobileItemsWrapper = styled.div<{
 			  }};
 `;
 
-const items = (
-	<>
-		<StyledButton $variant="unstyled">Quem somos</StyledButton>
-		<StyledButton>Agendar Consulta</StyledButton>
-	</>
-);
+export const defaultNavMenuItems = [
+	<StyledButton key="QuemSomos" $variant="unstyled">
+		Quem somos
+	</StyledButton>,
+	<StyledButton key="AgendarConsulta">Agendar Consulta</StyledButton>,
+];
 
-export default function NavItems() {
+export default function NavMenuItems(
+	props: NavMenuItemsProps
+): JSX.Element | null {
+	const { items = defaultNavMenuItems } = props;
+
 	const { screenSize } = useWindowSize();
 	const [isOpen, setOpen] = React.useState(false);
 
@@ -58,8 +66,9 @@ export default function NavItems() {
 
 	/* --------------------------- render desktop menu -------------------------- */
 	if (screenSize !== undefined) {
-		return items;
+		return <>{items}</>;
 	}
 
+	// TODO: Maybe it's possible to get the user device from the hook userAgent!!
 	return <></>;
 }
