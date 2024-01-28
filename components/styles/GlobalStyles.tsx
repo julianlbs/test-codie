@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.colors.primary};
     padding: 0;
     margin: 0;
-    font-family: font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
   }
 
   a {
@@ -16,6 +16,60 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+  }
+
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/static/Inter-Black.ttf") format("truetype");
+    font-weight: 900;
+  }
+  
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/static/Inter-ExtraBold.ttf") format("truetype");
+    font-weight: 800;
+  }
+  
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/static/Inter-Bold.ttf") format("truetype");
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/static/Inter-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+  }
+  
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/static/Inter-Medium.ttf") format("truetype");
+    font-weight: 500;
+  }
+  
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/static/Inter-Regular.ttf") format("truetype");
+    font-weight: 400;
+  }
+  
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/static/Inter-Light.ttf") format("truetype");
+    font-weight: 300;
+  }
+  
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/static/Inter-ExtraLight.ttf") format("truetype");
+    font-weight: 200;
+  }
+  
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/static/Inter-Thin.ttf") format("truetype");
+    font-weight: 100;
   }
 `;
 
