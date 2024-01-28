@@ -1,11 +1,12 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import WhitePokeball from "./WhitePokeball";
+import WhitePokeball from "../icons/WhitePokeball";
 
+// TODO: Improve animation behaviour (it should finish the animation on hover)
 const hideName = keyframes`
   from {
     opacity: 1;
-		width: 150px;
+		width: 180px;
   }
   to {
     opacity: 0;
@@ -20,7 +21,7 @@ const showName = keyframes`
 	}
   to {
     opacity: 1;
-		width: 150px;
+		width: 180px;
   }
 `;
 
@@ -30,7 +31,7 @@ const Wrapper = styled.div`
 	border-radius: 50px;
 	background-color: ${(props) => props.theme.colors.primary};
 	display: flex;
-	justify-items: center;
+	justify-content: center;
 	align-items: center;
 	position: relative;
 	overflow: hidden;
@@ -42,10 +43,10 @@ const PokeballWrapper = styled.div`
 `;
 
 const Name = styled.p`
-	fontsize: 20px;
+	font-size: 20px;
 	font-weight: 600;
 	color: white;
-	width: 150px;
+	width: 180px;
 	animation: ${hideName} 0.6s ease-out forwards;
 	animation-delay: 2s;
 	transition: width 0.6s ease-out;
@@ -54,12 +55,12 @@ const Name = styled.p`
 
 	${Wrapper}:hover & {
 		animation: ${showName} 0.6s ease-out forwards;
-		width: 150px;
+		width: 180px;
 		transition-delay: 0s;
 	}
 `;
 
-export default function BrandLogo() {
+export default function StyledBrandLogo() {
 	return (
 		<Wrapper>
 			<PokeballWrapper>
