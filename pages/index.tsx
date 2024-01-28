@@ -2,6 +2,7 @@ import Head from "next/head";
 import Header from "../components/layout/Header";
 import styled from "styled-components";
 import { H1 } from "../components/styles/H1.style";
+import StyledFooter from "../components/layout/Footer";
 
 const Container = styled.div`
 	min-height: 100vh;
@@ -54,6 +55,7 @@ export default function Home() {
 				</Title>
 				<DarkOverlay />
 			</Main>
+			<StyledFooter />
 		</Container>
 	);
 }
