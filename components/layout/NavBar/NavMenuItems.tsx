@@ -3,6 +3,7 @@ import StyledButton from "@/components/ui/buttons/Button";
 import useWindowSize from "@/hooks/useWindowSize";
 import Hamburger from "hamburger-react";
 import styled from "styled-components";
+import StyledLink from "../../ui/navigation/StyledLink";
 
 interface NavMenuItemsProps {
 	items?: ReactNode;
@@ -40,9 +41,9 @@ const MobileItemsWrapper = styled.div<{
 `;
 
 export const defaultNavMenuItems = [
-	<StyledButton key="QuemSomos" $variant="unstyled">
-		Quem somos
-	</StyledButton>,
+	<StyledLink key="QuemSomos" href="/quem-somos">
+		<StyledButton $variant="unstyled">Quem somos</StyledButton>
+	</StyledLink>,
 	<StyledButton key="AgendarConsulta">Agendar Consulta</StyledButton>,
 ];
 
