@@ -5,7 +5,7 @@ interface HeaderRootProps {
 	children: ReactNode;
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
 	width: 100%;
 	padding: 1em 2em;
 	display: flex;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { H1 } from "@/components/styles/H1.style";
-import MainLayout from "@/layouts/MainLayout";
+import MainLayout from "@/layouts/MainLayout/_index";
 import Head from "@/components/layout/Head/Head";
 
 const DarkOverlay = styled.div`
