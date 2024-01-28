@@ -25,7 +25,8 @@ export default function Head(props: HeadProps) {
 			<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 			<meta name="author" content="Julian Lima" />
 			<meta name="description" content={description} />
-			<meta name="keywords" content="pokemon, , keyword3" />
+			{/* TODO: Adicionar mais keywords */}
+			<meta name="keywords" content="pokemon" />
 			<meta property="og:title" content={title} />
 			<meta property="og:description" content={description} />
 			<meta property="og:image" content="/images/white-pokeball.svg" />

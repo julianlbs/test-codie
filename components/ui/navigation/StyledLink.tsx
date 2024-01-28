@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { Url } from "url";
 
 interface StyledLinkProps {
 	as?: string;

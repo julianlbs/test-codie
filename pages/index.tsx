@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { H1 } from "@/components/ui/typography/H1";
+import H1 from "@/components/ui/typography/H1";
 import MainLayout from "@/layouts/MainLayout";
 import Head from "@/components/layout/Head/Head";
 import React from "react";
