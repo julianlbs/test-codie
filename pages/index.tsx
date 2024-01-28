@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { H1 } from "@/components/styles/H1.style";
+import { H1 } from "@/components/ui/typography/H1";
 import MainLayout from "@/layouts/MainLayout/_index";
 import Head from "@/components/layout/Head/Head";
+import React from "react";
+import useRunOnClient from "@/hooks/useRunOnClient";
 
 const DarkOverlay = styled.div`
 	position: absolute;
@@ -29,14 +31,27 @@ const Main = styled.main`
 	position: relative;
 `;
 
-const head = (
+let head = (
 	<Head
 		title="Centro Pokémon"
 		description="Cuidamos bem do seu pokémon, para ele cuidar bem de você"
+		pageUrl=""
 	/>
 );
 
 export default function Home() {
+	const { runOnClient } = useRunOnClient();
+
+	runOnClient(() => {
+		head = (
+			<Head
+				title="Centro Pokémon"
+				description="Cuidamos bem do seu pokémon, para ele cuidar bem de você"
+				pageUrl={window.location.href}
+			/>
+		);
+	});
+
 	return (
 		<MainLayout head={head}>
 			<Main>

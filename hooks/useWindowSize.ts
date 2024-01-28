@@ -1,4 +1,3 @@
-// useWindowSize.js
 import { useState, useEffect } from 'react';
 
 interface IWindowSize {

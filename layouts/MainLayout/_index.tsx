@@ -1,6 +1,6 @@
 import React, { type ReactNode } from "react";
 import styled from "styled-components";
-import StyledBrandLogo from "@/components/styles/BrandLogo.style";
+import StyledBrandLogo from "@/components/ui/misc/BrandLogo";
 import Header from "@/components/layout/Header/_index";
 import Footer from "@/components/layout/Footer/_index";
 import Nav from "@/components/layout/Nav/_index";

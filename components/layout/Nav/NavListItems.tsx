@@ -1,5 +1,5 @@
 import React, { type ReactNode } from "react";
-import StyledButton from "@/components/styles/Button.style";
+import StyledButton from "@/components/ui/buttons/Button";
 import useWindowSize from "@/hooks/useWindowSize";
 import Hamburger from "hamburger-react";
 import styled from "styled-components";

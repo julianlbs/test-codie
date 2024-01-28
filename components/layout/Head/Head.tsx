@@ -6,10 +6,11 @@ interface HeadProps {
 	title: string;
 	description: string;
 	favicon?: string;
+	pageUrl?: string;
 }
 
 export default function Head(props: HeadProps) {
-	const { children, title, description, favicon } = props;
+	const { children, title, description, pageUrl, favicon } = props;
 
 	return (
 		<NextHead>
@@ -23,7 +24,7 @@ export default function Head(props: HeadProps) {
 			<meta property="og:title" content={title} />
 			<meta property="og:description" content={description} />
 			<meta property="og:image" content="/images/white-pokeball.svg" />
-			<meta property="og:url" content={window.location.href} />
+			<meta property="og:url" content={pageUrl} />
 
 			<link rel="icon" href={favicon ?? "/favicon.ico"} />
 			{children}
