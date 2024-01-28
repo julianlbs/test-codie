@@ -10,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: ${({ theme }) => theme.font.fontSize}
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
