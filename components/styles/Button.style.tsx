@@ -1,4 +1,4 @@
-import styled, { ThemeProps, css } from "styled-components";
+import styled, { css } from "styled-components";
 import React, { type ReactNode } from "react";
 
 interface StyledButtonProps {
