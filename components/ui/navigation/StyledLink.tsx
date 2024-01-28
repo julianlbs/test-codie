@@ -4,14 +4,14 @@ import styled from "styled-components";
 import { Url } from "url";
 
 interface StyledLinkProps {
-	as?: Url;
+	as?: string;
 	children: ReactNode;
 	className?: string;
-	href: Url;
+	href: string;
 }
 
 const StyledLink = ({ as, children, className, href }: StyledLinkProps) => (
-	<Link href={href} as={as} passHref>
+	<Link href={href} as={as} passHref legacyBehavior>
 		<a className={className}>{children}</a>
 	</Link>
 );
