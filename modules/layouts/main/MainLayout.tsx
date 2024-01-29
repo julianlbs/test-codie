@@ -1,9 +1,8 @@
 import React, { type ReactNode } from "react";
 import styled from "styled-components";
-import StyledBrandLogo from "@/components/ui/misc/BrandLogo";
-import Footer from "@/components/layout/Footer/_index";
-import Nav from "@/components/layout/NavBar/_index";
-import StyledLink from "../components/ui/navigation/StyledLink";
+import { BrandLogo, StyledLink } from "@/modules/common";
+import Footer from "../common/components/Footer/Footer";
+import NavBar from "../common/components/NavBar/_index";
 
 interface MainLayoutProps {
 	children: ReactNode;
@@ -28,21 +27,21 @@ export default function MainLayout(props: MainLayoutProps) {
 	return (
 		<Container>
 			{head}
-			<Nav.Root>
+			<NavBar.Root>
 				<StyledLink href="/">
-					<StyledBrandLogo />
+					<BrandLogo />
 				</StyledLink>
-				<Nav.Menu>
-					<Nav.MenuItems />
-				</Nav.Menu>
-			</Nav.Root>
+				<NavBar.Menu>
+					<NavBar.MenuItems />
+				</NavBar.Menu>
+			</NavBar.Root>
 			{children}
-			<Footer.Root>
+			<Footer>
 				<FooterText>
 					Todas as marcas e ilustrações utilizadas são de seus respectivos
 					donos.
 				</FooterText>
-			</Footer.Root>
+			</Footer>
 		</Container>
 	);
 }

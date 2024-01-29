@@ -5,7 +5,7 @@ interface IWindowSize {
   screenSize?: 'sm' | 'md' | 'lg' | 'xl' | undefined;
 }
 
-const useWindowSize = () => {
+export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState<IWindowSize>({
 
   });
@@ -48,5 +48,3 @@ const useWindowSize = () => {
 
   return windowSize;
 };
-
-export default useWindowSize;

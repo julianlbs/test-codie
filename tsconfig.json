@@ -16,7 +16,10 @@
 		"incremental": true,
 		"paths": {
 			"@/*": ["./*"],
-			"@/components/*": ["./components/*"]
+			"@/modules/common": ["./modules/common/_index.ts"],
+			"@/modules/features": ["./modules/features/_index.ts"],
+			"@/modules/layouts": ["./modules/layouts/_index.ts"],
+			"@/modules/styles": ["./modules/styles/_index.ts"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "styled.d.ts"],

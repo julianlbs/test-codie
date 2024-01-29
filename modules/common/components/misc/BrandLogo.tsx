@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import WhitePokeball from "@/components/icons/WhitePokeball";
+import { WhitePokeball } from "@/modules/common";
 
 // TODO: Improve animation behaviour (it should finish the animation on hover)
 const hideName = keyframes`

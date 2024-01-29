@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import H1 from "@/components/ui/typography/H1";
-import BreadCrumbs, {
-	BreadCrumbsProps,
-} from "@/components/ui/navigation/BreadCrumbs";
+import { H1, BreadCrumbs, BreadCrumbsProps } from "@/modules/common";
 
 interface HeaderProps {
 	title: string;

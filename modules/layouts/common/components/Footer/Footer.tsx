@@ -1,7 +1,7 @@
 import React, { type ReactNode } from "react";
 import styled from "styled-components";
 
-interface FooterRootProps {
+interface FooterProps {
 	children: ReactNode;
 }
 
@@ -10,10 +10,10 @@ const Wrapper = styled.footer`
 	background-color: #1d1d1d;
 `;
 
-function FooterRoot(props: FooterRootProps) {
+function Footer(props: FooterProps) {
 	const { children } = props;
 
 	return <Wrapper>{children}</Wrapper>;
 }
 
-export default FooterRoot;
+export default Footer;

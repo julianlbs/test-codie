@@ -1,8 +1,6 @@
 import React from "react";
-import MainLayout from "@/layouts/MainLayout";
-import Head from "@/components/layout/Head/Head";
-import Header from "@/components/layout/Header/Header";
-import { BreadCrumbsProps } from "@/components/ui/navigation/BreadCrumbs";
+import { MainLayout } from "@/modules/layouts";
+import { Head, Header, BreadCrumbsProps } from "@/modules/common";
 
 const head = (
 	<Head

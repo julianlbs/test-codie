@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function useClientSide() {
+export function useClientSide() {
   const runOnClient = (func: () => void) => {
     if (typeof window !== 'undefined') {
       if (window.document.readyState === 'loading') {
