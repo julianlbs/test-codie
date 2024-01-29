@@ -6,7 +6,7 @@ interface FooterProps {
 }
 
 const Wrapper = styled.footer`
-	padding: 0.6em 2em;
+	padding: 1em 2em;
 	background-color: #1d1d1d;
 `;
 

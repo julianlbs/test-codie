@@ -15,6 +15,8 @@ const Wrapper = styled.div<{ key?: number; children: ReactNode }>`
 
 const StyledLink = styled(Link)`
 	color: white;
+	font-size: 12px;
+	font-weight: 700;
 
 	&:hover {
 		color: white;

@@ -31,6 +31,9 @@ export * from '../common/components/typography/H1';
 export { default as H2 } from '../common/components/typography/H2';
 export * from '../common/components/typography/H2';
 
+export { default as H3 } from '../common/components/typography/H3';
+export * from '../common/components/typography/H3';
+
 /* ------------------------------- HOOKS ------------------------------- */
 export * from './hooks/useRunOnClient';
 export * from './hooks/useWindowSize';
