@@ -1,15 +1,15 @@
-import React, { type ReactNode } from "react";
+import React from "react";
 import { default as NextHead } from "next/head";
 
-interface HeadProps {
-	children?: ReactNode;
+export interface HeadProps extends React.HTMLAttributes<HTMLHeadElement> {
+	// children?: ReactNode;
 	title: string;
 	description: string;
 	favicon?: string;
 }
 
 export default function Head(props: HeadProps) {
-	const { children, title, description, favicon } = props;
+	const { title, description, favicon, ...otherProps } = props;
 
 	const [pageUrl, setPageUrl] = React.useState("");
 
@@ -18,7 +18,7 @@ export default function Head(props: HeadProps) {
 	}, []);
 
 	return (
-		<NextHead>
+		<NextHead {...otherProps}>
 			<meta charSet="UTF-8" />
 			<title>{title}</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,7 +32,6 @@ export default function Head(props: HeadProps) {
 			<meta property="og:image" content="/images/white-pokeball.svg" />
 			<meta property="og:url" content={pageUrl} />
 			<link rel="icon" href={favicon ?? "/favicon.ico"} />
-			{children}
 		</NextHead>
 	);
 }

@@ -1,6 +1,9 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { WhitePokeball } from "@/modules/common";
+import { WhitePokeball } from "@/modules/common/components";
+
+export interface StyledBrandLogoProps
+	extends React.HTMLAttributes<HTMLDivElement> {}
 
 // TODO: Improve animation behaviour (it should finish the animation on hover)
 const hideName = keyframes`
@@ -25,7 +28,22 @@ const showName = keyframes`
   }
 `;
 
-const Wrapper = styled.div`
+const LogoWrapper = styled.div`
+	padding: 7px 8px;
+`;
+
+function BrandLogo(props: StyledBrandLogoProps) {
+	return (
+		<div {...props}>
+			<LogoWrapper>
+				<WhitePokeball />
+			</LogoWrapper>
+			<Name>Centro Pokémon</Name>
+		</div>
+	);
+}
+
+const StyledBrandLogo = styled(BrandLogo)<StyledBrandLogoProps>`
 	width: min-content;
 	height: 53px;
 	border-radius: 50px;
@@ -38,10 +56,6 @@ const Wrapper = styled.div`
 	cursor: pointer;
 `;
 
-const PokeballWrapper = styled.div`
-	padding: 7px 8px;
-`;
-
 const Name = styled.p`
 	font-size: 20px;
 	font-weight: 600;
@@ -52,21 +66,11 @@ const Name = styled.p`
 	transition: width 0.6s ease-out;
 	-webkit-transition: width 0.6s ease-out;
 	white-space: nowrap;
-
-	${Wrapper}:hover & {
+	${StyledBrandLogo}:hover & {
 		animation: ${showName} 0.6s ease-out forwards;
 		width: 180px;
 		transition-delay: 0s;
 	}
 `;
 
-export default function StyledBrandLogo() {
-	return (
-		<Wrapper>
-			<PokeballWrapper>
-				<WhitePokeball />
-			</PokeballWrapper>
-			<Name>Centro Pokémon</Name>
-		</Wrapper>
-	);
-}
+export default StyledBrandLogo;

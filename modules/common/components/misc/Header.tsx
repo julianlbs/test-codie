@@ -1,14 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-import { H1, BreadCrumbs, BreadCrumbsProps } from "@/modules/common";
-
-interface HeaderProps {
+import {
+	StyledH1,
+	StyledBreadCrumbs,
+	StyledBreadCrumbsProps,
+} from "@/modules/common/components";
+export interface StyledHeaderProps extends React.HTMLAttributes<HTMLElement> {
 	title: string;
 	subtitle: string;
-	breadCrumbs: BreadCrumbsProps["items"];
+	breadCrumbs: StyledBreadCrumbsProps["items"];
 }
 
-const Wrapper = styled.header`
+function Header(props: StyledHeaderProps) {
+	const { title, subtitle, breadCrumbs, ...otherProps } = props;
+
+	return (
+		<header {...otherProps}>
+			<StyledBreadCrumbs items={breadCrumbs} />
+			<StyledH1>{title}</StyledH1>
+			<p>{subtitle}</p>
+		</header>
+	);
+}
+
+const StyledHeader = styled(Header)<StyledHeaderProps>`
 	width: 100%;
 	padding: 3em 2em;
 	background-color: ${(props) => props.theme.colors.primary};
@@ -17,15 +32,4 @@ const Wrapper = styled.header`
 	flex-direction: column;
 	gap: 0.6em;
 `;
-
-export default function Header(props: HeaderProps) {
-	const { title, subtitle, breadCrumbs } = props;
-
-	return (
-		<Wrapper>
-			<BreadCrumbs items={breadCrumbs} />
-			<H1>{title}</H1>
-			<p>{subtitle}</p>
-		</Wrapper>
-	);
-}
+export default StyledHeader;

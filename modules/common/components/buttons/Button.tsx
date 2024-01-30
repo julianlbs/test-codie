@@ -1,12 +1,15 @@
 import styled, { css } from "styled-components";
-import React, { type ReactNode } from "react";
-
-interface StyledButtonProps {
-	children?: ReactNode;
-	$variant?: "primary" | "unstyled";
+import React from "react";
+export interface StyledButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	variant?: "primary" | "unstyled";
 }
 
-const Button = styled.button<Omit<StyledButtonProps, "children">>`
+function Button(props: StyledButtonProps) {
+	return <button type="button" {...props} />;
+}
+
+const StyledButton = styled(Button)<StyledButtonProps>`
 	color: white;
 	font-weight: bold;
 	font-size: 14px;
@@ -21,7 +24,7 @@ const Button = styled.button<Omit<StyledButtonProps, "children">>`
 	}
 
 	${(props) => {
-		switch (props.$variant) {
+		switch (props.variant) {
 			case "primary":
 				return css`
 					background-color: ${(props) => props.theme.colors.primary};
@@ -41,8 +44,4 @@ const Button = styled.button<Omit<StyledButtonProps, "children">>`
 	}}
 `;
 
-export default function StyledButton(props: StyledButtonProps) {
-	const { children, ...otherProps } = props;
-
-	return <Button {...otherProps}>{children}</Button>;
-}
+export default StyledButton;

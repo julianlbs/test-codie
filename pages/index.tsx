@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Head, H1 } from "@/modules/common";
+import { Head, StyledH1 } from "@/modules/common/components";
 import { MainLayout } from "@/modules/layouts";
 import React from "react";
 
@@ -12,7 +12,7 @@ const DarkOverlay = styled.div`
 	background-color: rgba(0, 0, 0, 0.1);
 `;
 
-const Title = styled(H1)`
+const Title = styled(StyledH1)`
 	color: white;
 	text-align: center;
 	z-index: 10;
@@ -23,7 +23,6 @@ const Main = styled.main`
 	justify-content: center;
 	align-items: center;
 	color: white;
-	height: 100%;
 	flex: 1;
 	background-image: url("/images/pokemon-hero.jpg");
 	position: relative;
@@ -36,7 +35,7 @@ const head = (
 	/>
 );
 
-export default function Home() {
+export default function HomePage() {
 	return (
 		<MainLayout head={head}>
 			<Main>

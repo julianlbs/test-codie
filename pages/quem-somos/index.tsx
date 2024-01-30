@@ -1,6 +1,12 @@
 import React from "react";
 import { MainLayout } from "@/modules/layouts";
-import { Head, Header, BreadCrumbsProps, H2, H3 } from "@/modules/common";
+import {
+	Head,
+	StyledHeader,
+	type StyledBreadCrumbsProps,
+	StyledH2,
+	StyledH3,
+} from "@/modules/common/components";
 import styled from "styled-components";
 
 const head = (
@@ -10,7 +16,7 @@ const head = (
 	/>
 );
 
-const breadCrumbs: BreadCrumbsProps["items"] = [
+const breadCrumbs: StyledBreadCrumbsProps["items"] = [
 	{ title: "Página Inicial", href: "/" },
 	{ title: "Quem Somos", href: "/quem-somos" },
 ];
@@ -31,16 +37,16 @@ const SectionWrapper = styled.div`
 export default function QuemSomos() {
 	return (
 		<MainLayout head={head}>
-			<Header
+			<StyledHeader
 				title="Quem Somos"
 				subtitle="A maior rede de tratamento pokémon."
 				breadCrumbs={breadCrumbs}
 			/>
 			<Main>
-				<H2>O Centro Pokémon</H2>
+				<StyledH2>O Centro Pokémon</StyledH2>
 
 				<SectionWrapper>
-					<H3>Como funciona a cura de um pokémon?</H3>
+					<StyledH3>Como funciona a cura de um pokémon?</StyledH3>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
 						vel mi ut nunc sodales mattis eget at sem. Praesent mattis interdum
@@ -68,7 +74,7 @@ export default function QuemSomos() {
 				</SectionWrapper>
 
 				<SectionWrapper>
-					<H3>Uma tradição de mais de 20 anos</H3>
+					<StyledH3>Uma tradição de mais de 20 anos</StyledH3>
 
 					<p>
 						Etiam ac nisi sagittis, ullamcorper ex vel, dignissim urna. Mauris
@@ -82,7 +88,7 @@ export default function QuemSomos() {
 				</SectionWrapper>
 
 				<SectionWrapper>
-					<H3>O melhor para seu pokémon</H3>
+					<StyledH3>O melhor para seu pokémon</StyledH3>
 
 					<p>
 						Quisque porta cursus metus, id posuere mi commodo ac. Proin auctor
@@ -104,7 +110,7 @@ export default function QuemSomos() {
 				</SectionWrapper>
 
 				<SectionWrapper>
-					<H3>Alta Tecnologia</H3>
+					<StyledH3>Alta Tecnologia</StyledH3>
 
 					<p>
 						Fusce vitae ex pharetra, gravida turpis in, pretium dui. Nulla

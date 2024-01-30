@@ -1,19 +1,15 @@
-import React, { type ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
 
-interface FooterProps {
-	children: ReactNode;
+export interface StyledFooterProps extends React.HTMLAttributes<HTMLElement> {}
+
+function Footer(props: StyledFooterProps) {
+	return <div {...props} />;
 }
 
-const Wrapper = styled.footer`
+const StyledFooter = styled(Footer)<StyledFooterProps>`
 	padding: 1em 2em;
 	background-color: #1d1d1d;
 `;
 
-function Footer(props: FooterProps) {
-	const { children } = props;
-
-	return <Wrapper>{children}</Wrapper>;
-}
-
-export default Footer;
+export default StyledFooter;

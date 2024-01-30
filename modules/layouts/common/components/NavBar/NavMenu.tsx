@@ -1,17 +1,39 @@
-import React, { type ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
+import { useWindowSize } from "@/modules/common/hooks";
+import StyledNavMenuMobile from "./NavMenuMobile";
+import StyledNavMenuDesktop from "./NavMenuDesktop";
+import { type StyledNavMenuListItemsProps } from "./NavMenuItems";
 
-interface NavMenuProps {
-	children: ReactNode;
+interface NavMenuProps
+	extends Omit<React.HTMLAttributes<HTMLElement>, "children"> {
+	children: React.ReactElement<StyledNavMenuListItemsProps>;
 }
 
-const Wrapper = styled.nav`
-	display: flex;
-	align-items: center;
-	gap: 2rem;
-`;
+export interface StyledNavMenuProps extends NavMenuProps {}
 
-export default function NavMenu(props: NavMenuProps) {
-	const { children } = props;
-	return <Wrapper>{children}</Wrapper>;
+function NavMenu(props: StyledNavMenuProps) {
+	const { children, ...otherProps } = props;
+	const { screenSize } = useWindowSize();
+
+	/* --------------------------- render mobile menu --------------------------- */
+	if (screenSize === "sm") {
+		return (
+			<StyledNavMenuMobile {...otherProps}>{children}</StyledNavMenuMobile>
+		);
+	}
+
+	/* --------------------------- render desktop menu -------------------------- */
+	if (screenSize !== undefined) {
+		return (
+			<StyledNavMenuDesktop {...otherProps}>{children}</StyledNavMenuDesktop>
+		);
+	}
+
+	// TODO: Maybe it's possible to get the user device from the hook userAgent before rendering the component!!
+	return <></>;
 }
+
+const StyledNavMenu = styled(NavMenu)``;
+
+export default StyledNavMenu;

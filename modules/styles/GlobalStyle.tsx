@@ -27,6 +27,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0
   }
 
+  ul {
+    list-style: none;
+  }
+
   @font-face {
     font-family: "Inter";
     src: url("/fonts/Inter/static/Inter-Black.ttf") format("truetype");

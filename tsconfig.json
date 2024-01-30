@@ -16,10 +16,13 @@
 		"incremental": true,
 		"paths": {
 			"@/*": ["./*"],
-			"@/modules/common": ["./modules/common/_index.ts"],
+			"@/modules/common/components": ["./modules/common/components/_index.ts"],
+			"@/modules/common/hooks": ["./modules/common/hooks/_index.ts"],
+			"@/modules/common/utils": ["./modules/common/utils/_index.ts"],
 			"@/modules/features": ["./modules/features/_index.ts"],
 			"@/modules/layouts": ["./modules/layouts/_index.ts"],
-			"@/modules/styles": ["./modules/styles/_index.ts"]
+			"@/modules/styles": ["./modules/styles/_index.ts"],
+			"@/modules/pages": ["./modules/pages/_index.ts"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "styled.d.ts"],

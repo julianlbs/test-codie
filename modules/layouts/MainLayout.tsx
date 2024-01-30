@@ -1,8 +1,8 @@
 import React, { type ReactNode } from "react";
 import styled from "styled-components";
-import { BrandLogo, StyledLink } from "@/modules/common";
-import Footer from "../common/components/Footer/Footer";
-import NavBar from "../common/components/NavBar/_index";
+import { StyledBrandLogo, StyledLink } from "@/modules/common/components";
+import Footer from "./common/components/Footer/Footer";
+import NavBar from "./common/components/NavBar/_index";
 
 interface MainLayoutProps {
 	children: ReactNode;
@@ -29,7 +29,7 @@ export default function MainLayout(props: MainLayoutProps) {
 			{head}
 			<NavBar.Root>
 				<StyledLink href="/">
-					<BrandLogo />
+					<StyledBrandLogo />
 				</StyledLink>
 				<NavBar.Menu>
 					<NavBar.MenuItems />

@@ -1,11 +1,13 @@
-import React, { type ReactNode } from "react";
+import React from "react";
 import styled from "styled-components";
 
-interface NavRootProps {
-	children: ReactNode;
+export interface StyledNavRootProps extends React.HTMLAttributes<HTMLElement> {}
+
+function NavRoot(props: StyledNavRootProps) {
+	return <nav {...props} />;
 }
 
-const Wrapper = styled.header`
+const StyledNavRoot = styled(NavRoot)<StyledNavRootProps>`
 	width: 100%;
 	padding: 1em 2em;
 	display: flex;
@@ -13,8 +15,4 @@ const Wrapper = styled.header`
 	align-items: center;
 `;
 
-export default function NavRoot(props: NavRootProps) {
-	const { children } = props;
-
-	return <Wrapper>{children}</Wrapper>;
-}
+export default StyledNavRoot;
