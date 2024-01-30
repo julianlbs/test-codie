@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import React, { ReactNode } from "react";
+import { type ReactNode } from "react";
 export interface StyledButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	variant?: "primary" | "unstyled" | "outline";

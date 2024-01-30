@@ -2,13 +2,11 @@ import React from "react";
 import { MainLayout } from "@/modules/layouts/_index";
 import {
 	type StyledBreadCrumbsProps,
-	StyledH2 as H2,
 	Head,
 	StyledHeader,
-	StyledTextInput,
 } from "@/modules/common/components";
 import styled from "styled-components";
-import { FormAgendarConsulta } from "../../modules/pages/_index";
+import { Agendamento } from "@/modules/features";
 
 const head = (
 	<Head
@@ -22,18 +20,18 @@ const breadCrumbs: StyledBreadCrumbsProps["items"] = [
 	{ title: "Agendar Consulta", href: "/agendar-consulta" },
 ];
 
-const Wrapper = styled.div`
+const AgendamentoInstance = new Agendamento();
+
+const StyledContainer = styled.div`
 	padding: 3rem 6rem;
-	background-color: white;
+	flex: 1;
+
+	@media screen and (max-width: 756px) {
+		padding: 3rem 2rem;
+	}
 `;
 
-const StyledH2 = styled(H2)`
-	font-size: 20px;
-	text-align: center;
-	font-weight: 600;
-`;
-
-export default function index() {
+export default function AgendarConsultaPage() {
 	return (
 		<MainLayout head={head}>
 			<StyledHeader
@@ -41,14 +39,9 @@ export default function index() {
 				subtitle="Recupere seus pokémons em 5 segundos."
 				breadCrumbs={breadCrumbs}
 			/>
-			<Wrapper>
-				<StyledH2>
-					Preencha o formulário abaixo para agendar a sua consulta
-				</StyledH2>
-				<FormAgendarConsulta>
-					<StyledTextInput placeholder="Digite o Nome" />
-				</FormAgendarConsulta>
-			</Wrapper>
+			<StyledContainer>
+				<AgendamentoInstance.Form />
+			</StyledContainer>
 		</MainLayout>
 	);
 }
