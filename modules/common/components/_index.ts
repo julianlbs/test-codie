@@ -4,3 +4,4 @@ export * from './inputs/_index';
 export * from './misc/_index';
 export * from './navigation/_index';
 export * from './typography/_index';
+export * from './layout/_index';

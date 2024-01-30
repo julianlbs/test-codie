@@ -11,8 +11,11 @@ const StyledForm = styled(Form)<StyledFormProps>`
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	padding: 20px;
-	border-radius: 5px;
+	padding: 2rem 0;
+
+	@media screen and (max-width: 756px) {
+		padding: 1rem 0;
+	}
 `;
 
 export default StyledForm;

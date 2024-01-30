@@ -3,39 +3,42 @@ import styled from "styled-components";
 import { StyledLabel } from "@/modules/common/components";
 import { inputStyle } from "./styles/_index";
 
-export interface StyledTextInputProps
-	extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
+export interface StyledSelectProps
+	extends React.SelectHTMLAttributes<HTMLSelectElement> {
 	label?: string;
 	direction?: "horizontal" | "vertical";
 }
 
-const Wrapper = styled.div<StyledTextInputProps>`
+const Wrapper = styled.div<StyledSelectProps>`
 	display: flex;
 	flex-direction: column;
 	gap: 0.6rem;
+	width: 100%;
 
 	${(props) =>
 		props.direction === "horizontal"
 			? {
 					flexDirection: "row",
-					justifyContent: "center",
+					alignItems: "center",
+					gap: "3rem",
 			  }
-			: null}
+			: null};
 `;
 
-function TextInput(props: StyledTextInputProps) {
+function Select(props: StyledSelectProps) {
 	const { label, direction, ...otherProps } = props;
 
 	return (
 		<Wrapper direction={direction}>
 			{label ? <StyledLabel htmlFor={label}>{label}</StyledLabel> : null}
-			<input id={label} type="text" {...otherProps} />
+			<select id={label} {...otherProps} />
 		</Wrapper>
 	);
 }
 
-const StyledInput = styled(TextInput)<StyledTextInputProps>`
+const StyledSelect = styled(Select)<StyledSelectProps>`
 	${inputStyle}
+	background-color: white;
 `;
 
-export default StyledInput;
+export default StyledSelect;

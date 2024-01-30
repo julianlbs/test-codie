@@ -1,16 +1,31 @@
 import styled, { css } from "styled-components";
-import React from "react";
+import React, { ReactNode } from "react";
 export interface StyledButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	variant?: "primary" | "unstyled";
+	variant?: "primary" | "unstyled" | "outline";
+	leftSection?: ReactNode;
+	rightSection?: ReactNode;
 }
 
 function Button(props: StyledButtonProps) {
-	return <button type="button" {...props} />;
+	const {
+		children,
+		variant = "primary",
+		leftSection,
+		rightSection,
+		...otherProps
+	} = props;
+
+	return (
+		<button type="button" {...otherProps}>
+			{leftSection}
+			{children}
+			{rightSection}
+		</button>
+	);
 }
 
 const StyledButton = styled(Button)<StyledButtonProps>`
-	color: white;
 	font-weight: bold;
 	font-size: 14px;
 	padding: 12px 24px;
@@ -18,6 +33,9 @@ const StyledButton = styled(Button)<StyledButtonProps>`
 	border: none;
 	cursor: pointer;
 	transition: all 0.3s;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
 
 	:active {
 		transform: scale(0.98);
@@ -28,6 +46,12 @@ const StyledButton = styled(Button)<StyledButtonProps>`
 			case "primary":
 				return css`
 					background-color: ${(props) => props.theme.colors.primary};
+					color: white;
+				`;
+			case "outline":
+				return css`
+					background-color: transparent;
+					border: 1px solid rgba(0, 0, 0, 0.6);
 				`;
 			case "unstyled":
 				return css`
@@ -39,6 +63,7 @@ const StyledButton = styled(Button)<StyledButtonProps>`
 			default:
 				return css`
 					background-color: ${(props) => props.theme.colors.primary};
+					color: white;
 				`;
 		}
 	}}
