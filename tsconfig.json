@@ -1,7 +1,8 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"lib": ["dom", "dom.iterable", "esnext"],
+		"lib": ["es6", "dom"],
+		"types": ["reflect-metadata"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": true,
@@ -14,6 +15,8 @@
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"incremental": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
 		"paths": {
 			"@/*": ["./*"],
 			"@/modules/common/components": ["./modules/common/components/_index.ts"],
