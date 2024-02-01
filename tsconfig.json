@@ -17,6 +17,7 @@
 		"incremental": true,
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
+		"strictPropertyInitialization": false,
 		"paths": {
 			"@/*": ["./*"],
 			"@/modules/common/components": ["./modules/common/components/_index.ts"],
@@ -24,7 +25,9 @@
 			"@/modules/common/utils": ["./modules/common/utils/_index.ts"],
 			"@/modules/features": ["./modules/features/_index.ts"],
 			"@/modules/layouts": ["./modules/layouts/_index.ts"],
-			"@/modules/styles": ["./modules/styles/_index.ts"]
+			"@/modules/styles": ["./modules/styles/_index.ts"],
+			"@domain": ["./domain/_index.ts"],
+			"@data": ["./data/_index.ts"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "styled.d.ts"],

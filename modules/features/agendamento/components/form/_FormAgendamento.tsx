@@ -19,13 +19,17 @@ import {
 	ContainerSubmitOrder,
 	StyledTotalPrice,
 } from "./styles";
+import { useScheduling } from "@/modules/features";
 
 export interface StyledFormAgendamentoProps
 	extends Omit<React.FormHTMLAttributes<HTMLFormElement>, "type"> {}
 
 function FormAgendamento(props: StyledFormAgendamentoProps) {
+	const { ...otherProps } = props;
+	const { regions } = useScheduling();
+
 	return (
-		<StyledForm {...props}>
+		<StyledForm {...otherProps}>
 			<StyledH2>
 				Preencha o formulário abaixo para agendar a sua consulta
 			</StyledH2>
@@ -41,8 +45,11 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 					<option value="" disabled>
 						Selecione a sua região
 					</option>
-					<option value="Região 1">Região 1</option>
-					<option value="Região 2">Região 2</option>
+					{regions.map((item) => (
+						<option key={item} value={item}>
+							{item}
+						</option>
+					))}
 				</StyledSelect>
 
 				<StyledSelect name="Cidade" label="Cidade" defaultValue="">
@@ -83,6 +90,11 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 					<option value="" disabled>
 						Selecione uma data
 					</option>
+					{/* {dates?.map((date) => (
+						<option key={date} value={date}>
+							{date}
+						</option>
+					))} */}
 				</StyledSelect>
 
 				<StyledSelect

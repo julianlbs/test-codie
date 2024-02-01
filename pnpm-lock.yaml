@@ -29,6 +29,12 @@ dependencies:
   hamburger-react:
     specifier: ^2.5.0
     version: 2.5.0(react@18.2.0)
+  inversify:
+    specifier: ^6.0.2
+    version: 6.0.2
+  inversify-react:
+    specifier: ^1.1.0
+    version: 1.1.0(inversify@6.0.2)(react@18.2.0)
   next:
     specifier: 13.0.7
     version: 13.0.7(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
@@ -1775,6 +1781,20 @@ packages:
       get-intrinsic: 1.2.2
       hasown: 2.0.0
       side-channel: 1.0.4
+    dev: false
+
+  /inversify-react@1.1.0(inversify@6.0.2)(react@18.2.0):
+    resolution: {integrity: sha512-jXHcYhrFdlsdhmCVpedUc2yZT/HVA2OM/reUnIWuQdqkWKlGrNf6J+D1fA5t/vjnRsTU21egCqXFydHiZ2Fy7Q==}
+    peerDependencies:
+      inversify: ^5.0.5 || ^6.0.1
+      react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      inversify: 6.0.2
+      react: 18.2.0
+    dev: false
+
+  /inversify@6.0.2:
+    resolution: {integrity: sha512-i9m8j/7YIv4mDuYXUAcrpKPSaju/CIly9AHK5jvCBeoiM/2KEsuCQTTP+rzSWWpLYWRukdXFSl6ZTk2/uumbiA==}
     dev: false
 
   /is-array-buffer@3.0.2:

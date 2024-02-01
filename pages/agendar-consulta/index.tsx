@@ -6,7 +6,7 @@ import {
 	StyledHeader,
 } from "@/modules/common/components";
 import styled from "styled-components";
-import { Agendamento } from "@/modules/features";
+import { FormAgendamento } from "../../modules/features/_index";
 
 const head = (
 	<Head
@@ -19,8 +19,6 @@ const breadCrumbs: StyledBreadCrumbsProps["items"] = [
 	{ title: "Página Inicial", href: "/" },
 	{ title: "Agendar Consulta", href: "/agendar-consulta" },
 ];
-
-const AgendamentoInstance = new Agendamento();
 
 const StyledContainer = styled.div`
 	padding: 3rem 6rem;
@@ -40,7 +38,7 @@ export default function AgendarConsultaPage() {
 				breadCrumbs={breadCrumbs}
 			/>
 			<StyledContainer>
-				<AgendamentoInstance.Form />
+				<FormAgendamento />
 			</StyledContainer>
 		</MainLayout>
 	);
