@@ -23,7 +23,7 @@ export class SchedulingUseCase implements ISchedulingUseCase {
   }
 
   public async getRegions(): Promise<string[]> {
-    const data = await this?.pokemonRepo?.getRegions();
+    const data = await this.pokemonRepo.getRegions();
     if (data) {
       return data?.map(item => item.name);
     } else {
@@ -32,12 +32,12 @@ export class SchedulingUseCase implements ISchedulingUseCase {
   }
 
   public async getCities(region: string): Promise<string[]> {
-    const data = await this?.pokemonRepo?.getCities(region);
+    const data = await this.pokemonRepo.getCities(region);
     return data?.map(item => item.name);
   }
 
   public async getPokemons(): Promise<Pokemon[]> {
-    const data = await this?.pokemonRepo?.getPokemons();
+    const data = await this.pokemonRepo.getPokemons();
     return data;
   }
 

@@ -23,6 +23,6 @@ export class PokemonRepositoryImpl implements PokemonRepository {
 
   async getCities(region: string): Promise<City[]> {
     const res = await this.dataSource.getCities(region);
-    return res.results;
+    return res.locations;
   }
 }

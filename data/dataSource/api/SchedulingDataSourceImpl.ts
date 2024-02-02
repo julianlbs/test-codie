@@ -16,7 +16,7 @@ export class SchedulingDataSourceImpl implements SchedulingDataSource {
   }
 
   async getTime(date: string): Promise<string[]> {
-    const res = await this.apiConnection.POST<string, string[]>('/scheduling/time', date);
+    const res = await this.apiConnection.POST<{ date: string; }, string[]>('/scheduling/time', { date });
     return res.data;
   }
 

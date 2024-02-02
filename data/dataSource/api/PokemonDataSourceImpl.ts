@@ -1,5 +1,4 @@
-import type { City, Pokemon, Region } from "@domain";
-import type { PokemonApiRes, PokemonDataSource } from "../PokemonDataSource";
+import type { RegionResponse, PokemonDataSource, CitiesResponse, PokemonsResponse } from "../PokemonDataSource";
 import { Connection } from "../../api/Connection";
 import { injectable } from "inversify";
 import { API_CONSTANTS } from "@/infra/constants/api";
@@ -10,19 +9,18 @@ export class PokemonDataSourceImpl implements PokemonDataSource {
 
   constructor() {}
 
-  async getPokemons(): Promise<PokemonApiRes<Pokemon>> {
-    const res = await this.pokemonAPIConnection.GET<PokemonApiRes<Pokemon>>("/pokemon");
+  async getPokemons(): Promise<PokemonsResponse> {
+    const res = await this.pokemonAPIConnection.GET<PokemonsResponse>("/pokemon");
     return res.data;
   }
 
-  async getRegions(): Promise<PokemonApiRes<Region>> {
-    const res = await this.pokemonAPIConnection.GET<PokemonApiRes<Region>>("/region");
-
+  async getRegions(): Promise<RegionResponse> {
+    const res = await this.pokemonAPIConnection.GET<RegionResponse>("/region");
     return res.data;
   }
 
-  async getCities(region: string): Promise<PokemonApiRes<City>> {
-    const res = await this.pokemonAPIConnection.GET<PokemonApiRes<City>>(`/region/${region}`);
+  async getCities(region: string): Promise<CitiesResponse> {
+    const res = await this.pokemonAPIConnection.GET<CitiesResponse>(`/region/${region}`);
     return res.data;
   }
 }
