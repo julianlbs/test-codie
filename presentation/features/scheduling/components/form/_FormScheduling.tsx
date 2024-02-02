@@ -42,6 +42,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
 import StyledSchedulingSucess from "./SchedulingSuccess";
 import StyleSchedulingError from "./SchedulingError";
+import { ToastContainer, toast } from "react-toastify";
 
 export interface StyledFormSchedulingProps
 	extends Omit<FormHTMLAttributes<HTMLFormElement>, "type"> {
@@ -169,6 +170,12 @@ function FormScheduling(props: StyledFormSchedulingProps) {
 		}
 	}, [router.query]);
 
+	useEffect(() => {
+		if (!cities.data || !pokemonsQuery.data?.data || !timeList.data) {
+			toast.error("Ocorreu um erro ao carregar os dados");
+		}
+	}, [cities, pokemonsQuery.data?.data, timeList.data]);
+
 	/* ----------------------------- RENDER CONTENT ----------------------------- */
 
 	if (shownContent === "success") {
@@ -242,7 +249,7 @@ function FormScheduling(props: StyledFormSchedulingProps) {
 						<option value="" disabled>
 							Selecione a sua cidade
 						</option>
-						{cities.map((name) => (
+						{(cities.data ?? []).map((name) => (
 							<option key={name} value={name}>
 								{formatCityName(name)}
 							</option>
@@ -262,7 +269,6 @@ function FormScheduling(props: StyledFormSchedulingProps) {
 					) : null}
 				</StyledVStack>
 				<StyledGrid>
-					{/* TODO: Make field searchable */}
 					{watch("pokemons")?.map((name, index) => (
 						<StyledHStack key={name + index}>
 							<DeleteButton onClick={() => handleDeletePokemon(index)} />
@@ -282,7 +288,7 @@ function FormScheduling(props: StyledFormSchedulingProps) {
 										{capitalizeText(name) ?? "Selecione um pokémon"}
 									</option>
 								) : null}
-								{pokemonsQuery.data
+								{(pokemonsQuery.data?.data?.results ?? [])
 									.filter((el) => el.name !== name)
 									.map((pokemon) => (
 										<option key={pokemon.name} value={pokemon.name}>
@@ -322,11 +328,12 @@ function FormScheduling(props: StyledFormSchedulingProps) {
 						{...register("time")}
 						required
 						error={errors.time?.message}
+						disabled={watch("date") === ""}
 					>
 						<option value="" disabled>
 							Selecione um horário
 						</option>
-						{timeList?.map((time) => (
+						{(timeList.data ?? [])?.map((time) => (
 							<option key={time} value={time}>
 								{time}
 							</option>
@@ -347,6 +354,7 @@ function FormScheduling(props: StyledFormSchedulingProps) {
 					</StyledTotalPrice>
 					<StyledButton type="submit">Concluir Agendamento</StyledButton>
 				</ContainerSubmitOrder>
+				<ToastContainer theme="colored" position="bottom-right" />
 			</StyledForm>
 		</StyledLoadingOverlay>
 	);

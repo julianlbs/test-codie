@@ -9,18 +9,19 @@ export class PokemonDataSourceImpl implements PokemonDataSource {
 
   constructor() {}
 
-  async getPokemons(): Promise<PokemonsResponse> {
-    const res = await this.pokemonAPIConnection.GET<PokemonsResponse>("/pokemon");
-    return res.data;
+  async getPokemons() {
+    const res: PokemonsResponse = await this.pokemonAPIConnection.GET("/pokemon");
+    return res;
   }
 
-  async getRegions(): Promise<RegionResponse> {
-    const res = await this.pokemonAPIConnection.GET<RegionResponse>("/region");
-    return res.data;
+  async getRegions() {
+    const res: RegionResponse = await this.pokemonAPIConnection.GET("/region");
+    console.log(res);
+    return res;
   }
 
-  async getCities(region: string): Promise<CitiesResponse> {
-    const res = await this.pokemonAPIConnection.GET<CitiesResponse>(`/region/${region}`);
-    return res.data;
+  async getCities(region: string) {
+    const res: CitiesResponse = await this.pokemonAPIConnection.GET(`/region/${region}`);
+    return res;
   }
 }

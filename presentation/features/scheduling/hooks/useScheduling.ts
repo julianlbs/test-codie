@@ -1,14 +1,15 @@
-import type { Pokemon, Schedule, SchedulingUseCase } from "@domain";
+import type { Schedule, SchedulingUseCase } from "@domain";
 import { INVERSIFY_TYPES } from "@/infra/constants/inversify";
 import { useInjection } from "inversify-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { IResponse, PokemonsResponse } from "@data";
 
 export interface IUseScheduling {}
 
 export function useScheduling() {
-  const [cities, setCities] = useState<string[]>([]);
-  const [timeList, setTimeList] = useState<string[]>([]);
+  const [cities, setCities] = useState<IResponse<string[]>>({ data: [] } as any);
+  const [timeList, setTimeList] = useState<IResponse<string[]>>({ data: [] } as any);
   const scheduling = useInjection<SchedulingUseCase>(INVERSIFY_TYPES.SchedulingUseCase);
 
   const datesQuery = useQuery<string[]>({
@@ -24,22 +25,17 @@ export function useScheduling() {
   const citiesQuery = useMutation({
     mutationFn: async (region: string) => {
       const result = await scheduling.getCities(region);
-      if (!Array.isArray(result)) {
-        setCities([]);
-        return [];
-      }
       setCities(result);
       return result;
     }
   });
 
-  const pokemonsQuery = useQuery<Pokemon[]>({
+  const pokemonsQuery = useQuery<PokemonsResponse>({
     queryKey: ['pokemons'],
-    initialData: [],
+    initialData: { data: [] } as any,
     enabled: true,
     queryFn: async () => {
       const result = await scheduling.getPokemons();
-      if (!Array.isArray(result)) return [];
       return result;
     }
   });
@@ -47,10 +43,6 @@ export function useScheduling() {
   const timeQuery = useMutation({
     mutationFn: async (date: string) => {
       const result = await scheduling.getTime(date);
-      if (!Array.isArray(result)) {
-        setTimeList([]);
-        return [];
-      }
       setTimeList(result);
       return result;
     }

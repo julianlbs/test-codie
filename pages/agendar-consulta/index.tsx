@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MainLayout } from "@/presentation/layouts/_index";
 import {
 	type StyledBreadCrumbsProps,
@@ -11,6 +11,8 @@ import container from "@/inversify.config";
 import { SchedulingUseCase } from "@domain";
 import { INVERSIFY_TYPES } from "@/infra/constants/inversify";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { ToastContainer, toast } from "react-toastify";
+import type { IResponse } from "@data";
 
 const head = (
 	<Head
@@ -37,6 +39,13 @@ export default function AgendarConsultaPage({
 	regions,
 	dates,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+	const [error] = useState(!regions.data || !dates.data);
+
+	useEffect(() => {
+		if (error) {
+			toast.error("Ocorreu um erro ao carregar os dados", {});
+		}
+	}, [error]);
 	return (
 		<MainLayout head={head}>
 			<StyledHeader
@@ -45,8 +54,14 @@ export default function AgendarConsultaPage({
 				breadCrumbs={breadCrumbs}
 			/>
 			<StyledContainer>
-				<FormScheduling regions={regions} dates={dates} />
+				{!error ? (
+					<FormScheduling
+						regions={regions.data as string[]}
+						dates={dates.data as string[]}
+					/>
+				) : null}
 			</StyledContainer>
+			<ToastContainer position="bottom-right" theme="colored" />
 		</MainLayout>
 	);
 }
@@ -59,4 +74,7 @@ export const getServerSideProps = (async () => {
 	const dates = await schedulingUseCase.getDates();
 
 	return { props: { regions, dates } };
-}) satisfies GetServerSideProps<{ regions: string[]; dates: string[] }>;
+}) satisfies GetServerSideProps<{
+	regions: IResponse<string[]>;
+	dates: IResponse<string[]>;
+}>;

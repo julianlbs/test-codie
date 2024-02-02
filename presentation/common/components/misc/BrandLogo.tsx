@@ -5,7 +5,6 @@ import { WhitePokeball } from "@/presentation/common/components/_index";
 export interface StyledBrandLogoProps
 	extends React.HTMLAttributes<HTMLDivElement> {}
 
-// TODO: Improve animation behaviour (it should finish the animation on hover)
 const hideName = keyframes`
   from {
     opacity: 1;

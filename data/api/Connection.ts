@@ -1,7 +1,7 @@
 import axios, { type AxiosError } from "axios";
 
 export interface IResponse<T> {
-  data: T;
+  data: T | null;
   status: number;
   statusText: string;
 }
@@ -26,17 +26,19 @@ export class Connection implements IConnection {
       return { data: response.data, status: response.status, statusText: response.statusText };
     } catch (err) {
       const error = err as AxiosError;
-      throw new Error(`Error ${error.status} - ${error.message}`);
+      return { data: null, status: (error.status ?? 500), statusText: error?.message };
+      // throw new Error(`Error ${error.status} - ${error.message}`);
     }
   }
 
-  async POST<T, P>(path: string, payload: T) {
+  async POST<T>(path: string, payload: T) {
     try {
-      const response = await this.connection.post<P>(path, payload);
+      const response = await this.connection.post(path, payload);
       return { data: response.data, status: response.status, statusText: response.statusText };
     } catch (err) {
       const error = err as AxiosError;
-      throw new Error(`Error ${error.status} - ${error.message}`);
+      return { data: null, status: (error.status ?? 500), statusText: error?.message };
+      // throw new Error(`Error ${error.status} - ${error.message}`);
     }
   }
 

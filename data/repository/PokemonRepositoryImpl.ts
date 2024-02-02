@@ -1,4 +1,4 @@
-import type { Pokemon, Region, PokemonRepository, City } from "@domain";
+import type { PokemonRepository } from "@domain";
 import type { PokemonDataSource } from "../dataSource/PokemonDataSource";
 import { inject, injectable } from "inversify";
 import { INVERSIFY_TYPES } from "@/infra/constants/inversify";
@@ -11,18 +11,18 @@ export class PokemonRepositoryImpl implements PokemonRepository {
     this.dataSource = _dataSource;
   }
 
-  async getPokemons(): Promise<Pokemon[]> {
+  async getPokemons() {
     const res = await this.dataSource.getPokemons();
-    return res.results;
+    return res;
   }
 
-  async getRegions(): Promise<Region[]> {
+  async getRegions() {
     const res = await this.dataSource.getRegions();
-    return res.results;
+    return res;
   }
 
-  async getCities(region: string): Promise<City[]> {
+  async getCities(region: string) {
     const res = await this.dataSource.getCities(region);
-    return res.locations;
+    return res;
   }
 }
