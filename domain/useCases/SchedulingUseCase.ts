@@ -9,7 +9,7 @@ export interface ISchedulingUseCase {
   getCities(region: string): Promise<string[]>;
   getDates(): Promise<string[]>;
   getTime(date: string): Promise<string[]>;
-  create(schedule: Schedule): Promise<IResponse<Schedule>>;
+  create(schedule: Schedule): Promise<IResponse<Schedule | null>>;
 }
 
 @injectable()
@@ -51,9 +51,8 @@ export class SchedulingUseCase implements ISchedulingUseCase {
     return data;
   }
 
-  public async create(schedule: Schedule): Promise<IResponse<Schedule>> {
+  public async create(schedule: Schedule): Promise<IResponse<Schedule | null>> {
     const data = await this.schedulingRepo.create(schedule);
     return data;
   }
-
 }

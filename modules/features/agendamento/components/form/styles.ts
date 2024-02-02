@@ -2,6 +2,8 @@ import {
 	StyledH2 as H2,
 	StyledHStack,
 } from "@/modules/common/components";
+import type { RefAttributes } from "react";
+import LoadingOverlayWrapper, { type LoadingOverLayProps } from "react-loading-overlay-ts";
 import styled from "styled-components";
 
 export const StyledH2 = styled(H2)`
@@ -39,4 +41,10 @@ export const StyledTotalPrice = styled.p`
 	font-size: 24px;
 	font-weight: 700;
 	color: #1d1d1d;
+`;
+
+export const StyledLoadingOverlay = styled(LoadingOverlayWrapper) <LoadingOverLayProps & RefAttributes<HTMLDivElement>>`
+	padding: 1rem;
+	border-radius: 20%;
+	flex: 1;
 `;

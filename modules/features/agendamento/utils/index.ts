@@ -5,4 +5,3 @@ export const formatCityName = (name: string) => {
 
   return capitalizedWords.join(' ');
 };
-

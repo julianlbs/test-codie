@@ -7,12 +7,12 @@ import { INVERSIFY_TYPES } from "@/infra/constants/inversify";
 
 const container = new Container();
 
-container.bind<ISchedulingUseCase>(INVERSIFY_TYPES.SchedulingUseCase).to(SchedulingUseCase);
+container.bind<ISchedulingUseCase>(INVERSIFY_TYPES.SchedulingUseCase).to(SchedulingUseCase).inRequestScope();
 
-container.bind<PokemonRepository>(INVERSIFY_TYPES.PokemonRepository).to(PokemonRepositoryImpl);
-container.bind<SchedulingRepository>(INVERSIFY_TYPES.SchedulingRepository).to(SchedulingRepositoryImpl);
+container.bind<PokemonRepository>(INVERSIFY_TYPES.PokemonRepository).to(PokemonRepositoryImpl).inRequestScope();
+container.bind<SchedulingRepository>(INVERSIFY_TYPES.SchedulingRepository).to(SchedulingRepositoryImpl).inRequestScope();
 
-container.bind<PokemonDataSource>(INVERSIFY_TYPES.PokemonDataSource).to(PokemonDataSourceImpl);
-container.bind<SchedulingDataSource>(INVERSIFY_TYPES.SchedulingDataSource).to(SchedulingDataSourceImpl);
+container.bind<PokemonDataSource>(INVERSIFY_TYPES.PokemonDataSource).to(PokemonDataSourceImpl).inRequestScope();
+container.bind<SchedulingDataSource>(INVERSIFY_TYPES.SchedulingDataSource).to(SchedulingDataSourceImpl).inRequestScope();
 
 export default container;

@@ -16,12 +16,18 @@ export class SchedulingDataSourceImpl implements SchedulingDataSource {
   }
 
   async getTime(date: string): Promise<string[]> {
-    const res = await this.apiConnection.POST<{ date: string; }, string[]>('/scheduling/time', { date });
+    const res = await this.apiConnection.POST<{ date: string; }, string[]>("/scheduling/time", { date });
     return res.data;
   }
 
-  async create(payload: Schedule): Promise<IResponse<Schedule>> {
-    const res = await this.apiConnection.POST<Schedule, Schedule>('/scheduling/dates', payload);
-    return res;
+  async create(payload: Schedule): Promise<IResponse<Schedule | null>> {
+    const successRes: IResponse<Schedule> = { data: payload, status: 200, statusText: "Success" };
+    const errorRes: IResponse<null> = { data: null, status: 400, statusText: "Service unavailable" };
+
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    const rand = Math.random();
+
+    if (rand > 0.3) return successRes;
+    return errorRes;
   }
 }

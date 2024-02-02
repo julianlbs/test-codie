@@ -1,4 +1,4 @@
-import type { Pokemon, SchedulingUseCase } from "@domain";
+import type { Pokemon, Schedule, SchedulingUseCase } from "@domain";
 import { INVERSIFY_TYPES } from "@/infra/constants/inversify";
 import { useInjection } from "inversify-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -56,5 +56,11 @@ export function useScheduling() {
     }
   });
 
-  return { datesQuery, cities, citiesQuery, pokemonsQuery, timeList, timeQuery };
+  const createScheduling = useMutation({
+    mutationFn: async (payload: Schedule) => {
+      return scheduling.create(payload);
+    }
+  });
+
+  return { datesQuery, cities, citiesQuery, pokemonsQuery, timeList, timeQuery, createScheduling };
 }
