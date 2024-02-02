@@ -2,7 +2,6 @@ import React from "react";
 import { default as NextHead } from "next/head";
 
 export interface HeadProps extends React.HTMLAttributes<HTMLHeadElement> {
-	// children?: ReactNode;
 	title: string;
 	description: string;
 	favicon?: string;

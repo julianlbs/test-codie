@@ -32,7 +32,7 @@ const StyledButton = styled(Button)<StyledButtonProps>`
 	border-radius: 30px;
 	border: none;
 	cursor: pointer;
-	transition: all 0.3s;
+	transition: all 0.5s;
 	display: flex;
 	align-items: center;
 	gap: 1rem;

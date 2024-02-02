@@ -9,6 +9,7 @@ function Label(props: StyledLabelProps) {
 }
 
 const StyledLabel = styled(Label)`
+	white-space: nowrap;
 	font-weight: 700;
 	font-size: 12px;
 `;
