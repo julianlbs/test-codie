@@ -12,15 +12,15 @@ export class SchedulingRepositoryImpl implements SchedulingRepository {
     this.dataSource = _dataSource;
   }
 
-  async getDates(): Promise<string[]> {
+  async getDates() {
     return await this.dataSource.getDates();
   }
 
-  async getTime(date: string): Promise<string[]> {
+  async getTime(date: string) {
     return this.dataSource.getTime(date);
   }
 
-  async create(schedule: Schedule): Promise<IResponse<Schedule | null>> {
+  async create(schedule: Schedule) {
     return this.dataSource.create(schedule);
   }
 }

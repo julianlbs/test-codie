@@ -16,7 +16,6 @@ export class PokemonDataSourceImpl implements PokemonDataSource {
 
   async getRegions() {
     const res: RegionResponse = await this.pokemonAPIConnection.GET("/region");
-    console.log(res);
     return res;
   }
 
