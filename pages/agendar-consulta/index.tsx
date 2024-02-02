@@ -6,7 +6,11 @@ import {
 	StyledHeader,
 } from "@/modules/common/components";
 import styled from "styled-components";
-import { FormAgendamento } from "../../modules/features/_index";
+import { FormAgendamento, useScheduling } from "../../modules/features/_index";
+import container from "../../inversify.config";
+import { SchedulingUseCase } from "../../domain/_index";
+import { INVERSIFY_TYPES } from "../../infra/constants/inversify";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
 const head = (
 	<Head
@@ -29,7 +33,10 @@ const StyledContainer = styled.div`
 	}
 `;
 
-export default function AgendarConsultaPage() {
+export default function AgendarConsultaPage({
+	regions,
+	dates,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	return (
 		<MainLayout head={head}>
 			<StyledHeader
@@ -38,8 +45,18 @@ export default function AgendarConsultaPage() {
 				breadCrumbs={breadCrumbs}
 			/>
 			<StyledContainer>
-				<FormAgendamento />
+				<FormAgendamento regions={regions} dates={dates} />
 			</StyledContainer>
 		</MainLayout>
 	);
 }
+
+export const getServerSideProps = (async () => {
+	const schedulingUseCase = container.get<SchedulingUseCase>(
+		INVERSIFY_TYPES.SchedulingUseCase
+	);
+	const regions = await schedulingUseCase.getRegions();
+	const dates = await schedulingUseCase.getDates();
+
+	return { props: { regions, dates } };
+}) satisfies GetServerSideProps<{ regions: string[]; dates: string[] }>;

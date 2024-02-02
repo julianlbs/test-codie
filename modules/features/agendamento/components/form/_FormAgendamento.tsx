@@ -1,4 +1,4 @@
-import React from "react";
+import { type FormHTMLAttributes, type ChangeEvent, useEffect } from "react";
 import styled from "styled-components";
 import {
 	StyledButton,
@@ -8,6 +8,8 @@ import {
 	StyledTextInput,
 	StyledSelect,
 	StyledVStack,
+	StyledHStack,
+	DeleteButton,
 } from "@/modules/common/components";
 import ButtonAddPokemon from "./ButtonAddPokemon";
 import StyledOrderDetails from "./OrderDetails";
@@ -20,13 +22,84 @@ import {
 	StyledTotalPrice,
 } from "./styles";
 import { useScheduling } from "@/modules/features";
+import { useForm } from "react-hook-form";
+import { formatCityName } from "../../utils";
+import { capitalizeText, formatCurrencyToBRL } from "@/modules/common/utils";
+import type { Schedule } from "@domain";
 
 export interface StyledFormAgendamentoProps
-	extends Omit<React.FormHTMLAttributes<HTMLFormElement>, "type"> {}
+	extends Omit<FormHTMLAttributes<HTMLFormElement>, "type"> {
+	regions: string[];
+	dates: string[];
+}
 
 function FormAgendamento(props: StyledFormAgendamentoProps) {
-	const { ...otherProps } = props;
-	const { regions } = useScheduling();
+	const { regions, dates, ...otherProps } = props;
+	const { cities, citiesQuery, pokemonsQuery, timeList, timeQuery } =
+		useScheduling();
+
+	const { register, watch, setValue, getValues } = useForm<Schedule>({
+		defaultValues: {
+			city: "",
+			date: "",
+			name: "",
+			pokemons: [],
+			price: {
+				currency: "R$",
+				pricePerPokemon: 70,
+				taxPercentage: 0.03,
+				subTotal: 0,
+				total: 0,
+			},
+			region: "",
+			surName: "",
+			time: "",
+		},
+	});
+
+	const handleSelectRegion = (e: ChangeEvent<HTMLSelectElement>) => {
+		citiesQuery.mutateAsync(e.target.value);
+		setValue("region", e.target.value);
+	};
+
+	const handleSelectPokemon = (
+		e: ChangeEvent<HTMLSelectElement>,
+		index: number
+	) => {
+		const list = getValues("pokemons");
+		list[index] = e.target.value;
+		setValue("pokemons", list);
+	};
+
+	const handleAddPokemon = () => {
+		const list = getValues("pokemons");
+		setValue("pokemons", list.concat(""));
+		handleUpdatePrice();
+	};
+
+	const handleDeletePokemon = (index: number) => {
+		const list = getValues("pokemons");
+		list.splice(index, 1);
+		setValue("pokemons", list);
+		handleUpdatePrice();
+	};
+
+	const handleSelectDate = (e: ChangeEvent<HTMLSelectElement>) => {
+		timeQuery.mutateAsync(e.target.value);
+		setValue("date", e.target.value);
+	};
+
+	const handleUpdatePrice = () => {
+		const pokemons = getValues("pokemons");
+		const price = getValues("price");
+		const subTotal = pokemons.length * price.pricePerPokemon;
+		const total = subTotal * (1 + price.taxPercentage);
+		setValue("price", { ...price, subTotal, total });
+	};
+
+	useEffect(() => {
+		pokemonsQuery.refetch();
+	}, []);
 
 	return (
 		<StyledForm {...otherProps}>
@@ -35,30 +108,46 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 			</StyledH2>
 
 			<StyledGrid>
-				<StyledTextInput label="Nome" placeholder="Digite o nome" />
+				<StyledTextInput
+					label="Nome"
+					placeholder="Digite o nome"
+					{...register("name")}
+				/>
 				<StyledTextInput
 					label="Sobrenome"
 					placeholder="Digite o seu sobrenome"
+					{...register("surName")}
 				/>
-				<StyledSelect name="Região" label="Região" defaultValue="">
-					{/* TODO: Integrar com API */}
+				<StyledSelect
+					label="Região"
+					defaultValue=""
+					{...register("region")}
+					onChange={handleSelectRegion}
+				>
 					<option value="" disabled>
 						Selecione a sua região
 					</option>
-					{regions.map((item) => (
-						<option key={item} value={item}>
-							{item}
+					{regions.map((name) => (
+						<option key={name} value={name}>
+							{capitalizeText(name)}
 						</option>
 					))}
 				</StyledSelect>
 
-				<StyledSelect name="Cidade" label="Cidade" defaultValue="">
-					{/* TODO: Integrar com API */}
+				<StyledSelect
+					label="Cidade"
+					defaultValue=""
+					{...register("city")}
+					disabled={watch("region") === ""}
+				>
 					<option value="" disabled>
 						Selecione a sua cidade
 					</option>
-					<option value="Cidade 1">Cidade 1</option>
-					<option value="Cidade 2">Cidade 2</option>
+					{cities.map((name) => (
+						<option key={name} value={name}>
+							{formatCityName(name)}
+						</option>
+					))}
 				</StyledSelect>
 			</StyledGrid>
 
@@ -67,53 +156,82 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 				<StyledDescription>Atendemos até 06 pokémons por vez</StyledDescription>
 			</StyledVStack>
 			<StyledGrid>
-				<StyledSelect
-					name="Pokemón"
-					label="Pokemón"
-					defaultValue=""
-					direction="horizontal"
-				>
-					{/* TODO: Integrar com API */}
-					<option value="" disabled>
-						Selecione o pokémon
-					</option>
-					<option value="Pokemón 1">Pokemón 1</option>
-					<option value="Pokemón 2">Pokemón 2</option>
-				</StyledSelect>
+				{/* TODO: Make field searchable */}
+				{watch("pokemons").map((name, index) => (
+					<StyledHStack key={name + index}>
+						<DeleteButton onClick={() => handleDeletePokemon(index)} />
+						<StyledSelect
+							label={`Pokemón ${index + 1}`}
+							defaultValue={name}
+							direction="horizontal"
+							{...register("pokemons")}
+							onChange={(e) => handleSelectPokemon(e, index)}
+						>
+							<option value="" disabled>
+								Selecione o pokémon
+							</option>
+							{name !== "" ? (
+								<option value={name}>{capitalizeText(name)}</option>
+							) : null}
+							{pokemonsQuery.data
+								.filter((el) => el.name !== name)
+								.map((pokemon) => (
+									<option key={pokemon.name} value={pokemon.name}>
+										{capitalizeText(pokemon.name)}
+									</option>
+								))}
+						</StyledSelect>
+					</StyledHStack>
+				))}
 			</StyledGrid>
 			<ContainerButtonAddPokemon>
-				<ButtonAddPokemon />
+				<ButtonAddPokemon onClick={handleAddPokemon} />
 			</ContainerButtonAddPokemon>
 
 			<StyledGrid>
-				<StyledSelect name="Data" defaultValue="" label="Data para Atendimento">
+				<StyledSelect
+					defaultValue=""
+					label="Data para Atendimento"
+					{...register("date")}
+					onChange={handleSelectDate}
+				>
 					<option value="" disabled>
 						Selecione uma data
 					</option>
-					{/* {dates?.map((date) => (
+					{dates?.map((date) => (
 						<option key={date} value={date}>
 							{date}
 						</option>
-					))} */}
+					))}
 				</StyledSelect>
 
 				<StyledSelect
-					name="Horário"
 					defaultValue=""
 					label="Horário de Atendimento"
+					{...register("time")}
 				>
 					<option value="" disabled>
 						Selecione um horário
 					</option>
+					{timeList?.map((time) => (
+						<option key={time} value={time}>
+							{time}
+						</option>
+					))}
 				</StyledSelect>
 			</StyledGrid>
 
 			<StyledDivider />
 
-			<StyledOrderDetails />
+			<StyledOrderDetails
+				price={watch("price")}
+				pokemonQuantity={watch("pokemons").length}
+			/>
 
 			<ContainerSubmitOrder>
-				<StyledTotalPrice>Valor Total R$ 72,10</StyledTotalPrice>
+				<StyledTotalPrice>
+					Valor Total {formatCurrencyToBRL(watch("price")?.total)}
+				</StyledTotalPrice>
 				<StyledButton>Concluir Agendamento</StyledButton>
 			</ContainerSubmitOrder>
 		</StyledForm>

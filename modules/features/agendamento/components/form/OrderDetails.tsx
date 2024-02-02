@@ -1,9 +1,14 @@
 import { StyledHStack, StyledVStack } from "@/modules/common/components";
 import { type HTMLAttributes } from "react";
 import styled from "styled-components";
+import { Price } from "@domain";
+import { formatCurrencyToBRL } from "@/modules/common/utils";
 
 export interface StyledOrderDetailsProps
-	extends HTMLAttributes<HTMLDivElement> {}
+	extends HTMLAttributes<HTMLDivElement> {
+	price: Price;
+	pokemonQuantity: number;
+}
 
 const StyledDetailItem = styled(StyledHStack)`
 	width: 100%;
@@ -25,35 +30,38 @@ const StyledTaxText = styled(StyledText)`
 `;
 
 function OrderDetails(props: StyledOrderDetailsProps) {
+	const { price, pokemonQuantity, ...otherProps } = props;
+	console.log(price);
 	return (
-		<StyledVStack {...props}>
+		<StyledVStack {...otherProps}>
 			<StyledDetailItem>
 				<StyledText>Número de pokémons a serem atendidos</StyledText>
-				{/* TODO: Implementar quantidade */}
-				<StyledText>01</StyledText>
+				<StyledText>{pokemonQuantity}</StyledText>
 			</StyledDetailItem>
 
 			<StyledDetailItem>
 				<StyledText>Atendimento unitário por pokémon</StyledText>
 				{/* TODO: Implementar valor */}
-				<StyledText>R$ 70,00</StyledText>
+				<StyledText>{formatCurrencyToBRL(price.pricePerPokemon)}</StyledText>
 			</StyledDetailItem>
 
 			<StyledDetailItem>
 				<StyledText>Subtotal</StyledText>
 				{/* TODO: Implementar subtotal */}
-				<StyledText>R$ 70,00</StyledText>
+				<StyledText>{formatCurrencyToBRL(price.subTotal)}</StyledText>
 			</StyledDetailItem>
 
 			<StyledDetailItem>
 				<StyledText>Taxa geracional*</StyledText>
 				{/* TODO: Implementar taxa */}
-				<StyledText>R$ 2,10</StyledText>
+				<StyledText>
+					{formatCurrencyToBRL(price.subTotal * price.taxPercentage)}
+				</StyledText>
 			</StyledDetailItem>
 
 			<StyledTaxText>
-				*adicionamos uma taxa de 3%, multiplicado pelo número da geração mais
-				alta do time, com limite de até 30%
+				*adicionamos uma taxa de {price.taxPercentage * 100}%, multiplicado pelo
+				número da geração mais alta do time, com limite de até 30%
 			</StyledTaxText>
 		</StyledVStack>
 	);

@@ -1,16 +1,16 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(
     req: NextApiRequest,
     res: NextApiResponse<Array<String>>
 ) {
     if (req.method !== 'POST') {
-        res.status(405).end()
-        return
+        res.status(405).end();
+        return;
     }
-    if (req.headers['content-type']?.toLowerCase() !== "application/json" && !req.body.hasOwnProperty("date")) {
-        res.status(400).end()
-        return
+    if (req.headers['content-type']?.toLowerCase() !== "application/json" && !req.body["date"]) {
+        res.status(400).end();
+        return;
     }
     res.status(200).json([
         "10:00:00",
@@ -29,5 +29,5 @@ export default function handler(
         "17:30:00",
         "18:00:00",
         "18:30:00"
-    ])
+    ]);
 }
