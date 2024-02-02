@@ -1,1 +1,1 @@
-export * from './agendamento/_index';
+export * from './scheduling/_index';

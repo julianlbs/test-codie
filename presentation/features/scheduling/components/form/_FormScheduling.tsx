@@ -43,13 +43,13 @@ import { useRouter } from "next/router";
 import StyledSchedulingSucess from "./SchedulingSuccess";
 import StyleSchedulingError from "./SchedulingError";
 
-export interface StyledFormAgendamentoProps
+export interface StyledFormSchedulingProps
 	extends Omit<FormHTMLAttributes<HTMLFormElement>, "type"> {
 	regions: string[];
 	dates: string[];
 }
 
-function FormAgendamento(props: StyledFormAgendamentoProps) {
+function FormScheduling(props: StyledFormSchedulingProps) {
 	const { regions, dates, ...otherProps } = props;
 	const router = useRouter();
 	const [shownContent, setShownContent] = useState<
@@ -350,9 +350,7 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 	);
 }
 
-const StyledFormAgendamento = styled(
-	FormAgendamento
-)<StyledFormAgendamentoProps>`
+const StyledFormScheduling = styled(FormScheduling)<StyledFormSchedulingProps>`
 	margin-left: auto;
 	margin-right: auto;
 	gap: 3rem;
@@ -362,4 +360,4 @@ const StyledFormAgendamento = styled(
 	}
 `;
 
-export default StyledFormAgendamento;
+export default StyledFormScheduling;

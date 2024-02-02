@@ -7,7 +7,7 @@ import {
 } from "@/presentation/common/components/_index";
 import styled from "styled-components";
 import {
-	FormAgendamento,
+	FormScheduling,
 	useScheduling,
 } from "../../presentation/features/_index";
 import container from "../../inversify.config";
@@ -48,7 +48,7 @@ export default function AgendarConsultaPage({
 				breadCrumbs={breadCrumbs}
 			/>
 			<StyledContainer>
-				<FormAgendamento regions={regions} dates={dates} />
+				<FormScheduling regions={regions} dates={dates} />
 			</StyledContainer>
 		</MainLayout>
 	);
