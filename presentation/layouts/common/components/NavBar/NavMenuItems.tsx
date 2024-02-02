@@ -1,7 +1,10 @@
 import React from "react";
-import { StyledButton, StyledLink } from "@/modules/common/components";
+import {
+	StyledButton,
+	StyledLink,
+} from "@/presentation/common/components/_index";
 import styled from "styled-components";
-import { useWindowSize } from "@/modules/common/hooks";
+import { useWindowSize } from "@/presentation/common/hooks/_index";
 import { useNavMenuStore } from "./store/useNavMenuStore";
 import Hamburger from "hamburger-react";
 

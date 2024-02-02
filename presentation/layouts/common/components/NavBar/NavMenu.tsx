@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useWindowSize } from "@/modules/common/hooks";
+import { useWindowSize } from "@/presentation/common/hooks/_index";
 import StyledNavMenuMobile from "./NavMenuMobile";
 import StyledNavMenuDesktop from "./NavMenuDesktop";
 import { type StyledNavMenuListItemsProps } from "./NavMenuItems";

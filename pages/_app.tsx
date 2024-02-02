@@ -2,7 +2,7 @@ import "reflect-metadata";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@/infra/constants/theme";
-import { GlobalStyle } from "@/modules/styles";
+import { GlobalStyle } from "@/presentation/styles/_index";
 import container from "@/inversify.config";
 import { Provider } from "inversify-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

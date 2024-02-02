@@ -1,8 +1,11 @@
-import { StyledHStack, StyledVStack } from "@/modules/common/components";
+import {
+	StyledHStack,
+	StyledVStack,
+} from "@/presentation/common/components/_index";
 import { type HTMLAttributes } from "react";
 import styled from "styled-components";
 import { Price } from "@domain";
-import { formatCurrencyToBRL } from "@/modules/common/utils";
+import { formatCurrencyToBRL } from "@/presentation/common/utils/_index";
 
 export interface StyledOrderDetailsProps
 	extends HTMLAttributes<HTMLDivElement> {

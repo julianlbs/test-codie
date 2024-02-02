@@ -1,12 +1,12 @@
 import React from "react";
-import { MainLayout } from "@/modules/layouts";
+import { MainLayout } from "@/presentation/layouts/_index";
 import {
 	Head,
 	StyledHeader,
 	type StyledBreadCrumbsProps,
 	StyledH2,
 	StyledH3,
-} from "@/modules/common/components";
+} from "@/presentation/common/components/_index";
 import styled from "styled-components";
 
 const head = (

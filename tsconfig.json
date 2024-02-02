@@ -20,12 +20,14 @@
 		"strictPropertyInitialization": false,
 		"paths": {
 			"@/*": ["./*"],
-			"@/modules/common/components": ["./modules/common/components/_index.ts"],
-			"@/modules/common/hooks": ["./modules/common/hooks/_index.ts"],
-			"@/modules/common/utils": ["./modules/common/utils/_index.ts"],
-			"@/modules/features": ["./modules/features/_index.ts"],
-			"@/modules/layouts": ["./modules/layouts/_index.ts"],
-			"@/modules/styles": ["./modules/styles/_index.ts"],
+			"@/modules/common/components": [
+				"presentation/common/components/_index.ts"
+			],
+			"@/modules/common/hooks": ["presentation/common/hooks/_index.ts"],
+			"@/modules/common/utils": ["presentation/common/utils/_index.ts"],
+			"@/modules/features": ["presentation/features/_index.ts"],
+			"@/modules/layouts": ["presentation/layouts/_index.ts"],
+			"@/modules/styles": ["presentation/styles/_index.ts"],
 			"@domain": ["./domain/_index.ts"],
 			"@data": ["./data/_index.ts"]
 		}

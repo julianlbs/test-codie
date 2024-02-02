@@ -1,5 +1,8 @@
 import React, { ButtonHTMLAttributes } from "react";
-import { PlusIcon, StyledButton } from "@/modules/common/components";
+import {
+	PlusIcon,
+	StyledButton,
+} from "@/presentation/common/components/_index";
 
 const ButtonIcon = <PlusIcon width={16} height={16} />;
 

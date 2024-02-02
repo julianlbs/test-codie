@@ -1,6 +1,6 @@
 import React from "react";
-import { MainLayout } from "@/modules/layouts";
-import { Head } from "@/modules/common/components";
+import { MainLayout } from "@/presentation/layouts/_index";
+import { Head } from "@/presentation/common/components/_index";
 import styled from "styled-components";
 
 const head = (

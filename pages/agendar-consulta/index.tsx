@@ -1,12 +1,15 @@
 import React from "react";
-import { MainLayout } from "@/modules/layouts/_index";
+import { MainLayout } from "@/presentation/layouts/_index";
 import {
 	type StyledBreadCrumbsProps,
 	Head,
 	StyledHeader,
-} from "@/modules/common/components";
+} from "@/presentation/common/components/_index";
 import styled from "styled-components";
-import { FormAgendamento, useScheduling } from "../../modules/features/_index";
+import {
+	FormAgendamento,
+	useScheduling,
+} from "../../presentation/features/_index";
 import container from "../../inversify.config";
 import { SchedulingUseCase } from "../../domain/_index";
 import { INVERSIFY_TYPES } from "../../infra/constants/inversify";

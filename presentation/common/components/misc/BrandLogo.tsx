@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { WhitePokeball } from "@/modules/common/components";
+import { WhitePokeball } from "@/presentation/common/components/_index";
 
 export interface StyledBrandLogoProps
 	extends React.HTMLAttributes<HTMLDivElement> {}

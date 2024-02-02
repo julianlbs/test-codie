@@ -4,7 +4,7 @@ import {
 	OptionHTMLAttributes,
 } from "react";
 import styled from "styled-components";
-import { StyledLabel } from "@/modules/common/components";
+import { StyledLabel } from "@/presentation/common/components/_index";
 import { StyledError, StyledRequired, inputStyle } from "./styles/_index";
 
 export interface StyledSelectProps

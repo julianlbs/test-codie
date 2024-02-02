@@ -4,7 +4,7 @@ import {
 	StyledH1,
 	StyledBreadCrumbs,
 	StyledBreadCrumbsProps,
-} from "@/modules/common/components";
+} from "@/presentation/common/components/_index";
 export interface StyledHeaderProps extends React.HTMLAttributes<HTMLElement> {
 	title: string;
 	subtitle: string;

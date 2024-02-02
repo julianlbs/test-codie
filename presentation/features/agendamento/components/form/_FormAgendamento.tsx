@@ -17,7 +17,7 @@ import {
 	DeleteButton,
 	StyledRequired,
 	StyledError,
-} from "@/modules/common/components";
+} from "@/presentation/common/components/_index";
 import ButtonAddPokemon from "./ButtonAddPokemon";
 import StyledOrderDetails from "./OrderDetails";
 import {
@@ -29,10 +29,13 @@ import {
 	StyledTotalPrice,
 	StyledLoadingOverlay,
 } from "./styles";
-import { useScheduling } from "@/modules/features";
+import { useScheduling } from "@/presentation/features/_index";
 import { useForm } from "react-hook-form";
 import { formatCityName } from "../../utils";
-import { capitalizeText, formatCurrencyToBRL } from "@/modules/common/utils";
+import {
+	capitalizeText,
+	formatCurrencyToBRL,
+} from "@/presentation/common/utils/_index";
 import type { Schedule } from "@domain";
 import { schedulingSchema } from "./validation";
 import { yupResolver } from "@hookform/resolvers/yup";
