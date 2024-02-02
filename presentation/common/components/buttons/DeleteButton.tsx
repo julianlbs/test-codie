@@ -14,11 +14,7 @@ const StyledButton = styled(Button)`
 `;
 
 export default function DeleteButton(props: StyledButtonProps) {
-	return (
-		<StyledButton
-			rightSection={<TrashIcon fill="red" width={16} height={16} />}
-			variant="outline"
-			{...props}
-		/>
-	);
+	const icon = <TrashIcon fill="red" width={16} height={16} />;
+
+	return <StyledButton rightSection={icon} variant="outline" {...props} />;
 }

@@ -4,7 +4,7 @@ import {
 } from "@/presentation/common/components/_index";
 import { type HTMLAttributes } from "react";
 import styled from "styled-components";
-import { Price } from "@domain";
+import type { Price } from "@domain";
 import { formatCurrencyToBRL } from "@/presentation/common/utils/_index";
 
 export interface StyledOrderDetailsProps
@@ -43,19 +43,16 @@ function OrderDetails(props: StyledOrderDetailsProps) {
 
 			<StyledDetailItem>
 				<StyledText>Atendimento unitário por pokémon</StyledText>
-				{/* TODO: Implementar valor */}
 				<StyledText>{formatCurrencyToBRL(price.pricePerPokemon)}</StyledText>
 			</StyledDetailItem>
 
 			<StyledDetailItem>
 				<StyledText>Subtotal</StyledText>
-				{/* TODO: Implementar subtotal */}
 				<StyledText>{formatCurrencyToBRL(price.subTotal)}</StyledText>
 			</StyledDetailItem>
 
 			<StyledDetailItem>
 				<StyledText>Taxa geracional*</StyledText>
-				{/* TODO: Implementar taxa */}
 				<StyledText>
 					{formatCurrencyToBRL(price.subTotal * price.taxPercentage)}
 				</StyledText>

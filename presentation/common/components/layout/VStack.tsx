@@ -1,8 +1,7 @@
-import React from "react";
+import type { HTMLAttributes } from "react";
 import styled from "styled-components";
 
-export interface StyledVStackProps
-	extends React.HTMLAttributes<HTMLDivElement> {
+export interface StyledVStackProps extends HTMLAttributes<HTMLDivElement> {
 	gap?: string;
 }
 

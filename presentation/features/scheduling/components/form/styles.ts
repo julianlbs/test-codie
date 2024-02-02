@@ -1,7 +1,7 @@
 import {
 	StyledH2 as H2,
 	StyledHStack,
-} from "@/presentation/common/components/_index";
+} from "@presentation/common/components";
 import type { RefAttributes } from "react";
 import LoadingOverlayWrapper, { type LoadingOverLayProps } from "react-loading-overlay-ts";
 import styled from "styled-components";

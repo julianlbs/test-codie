@@ -1,6 +1,6 @@
-import React, { HTMLAttributes } from "react";
+import React, { type HTMLAttributes } from "react";
 import styled from "styled-components";
-import { CheckIcon, StyledButton } from "../../../../common/components/_index";
+import { CheckIcon, StyledButton } from "@presentation/common/components";
 import { useRouter } from "next/router";
 
 interface StyledSchedulingSucessProps extends HTMLAttributes<HTMLDivElement> {

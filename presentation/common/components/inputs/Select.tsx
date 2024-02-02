@@ -1,7 +1,7 @@
 import {
 	type SelectHTMLAttributes,
 	forwardRef,
-	OptionHTMLAttributes,
+	type OptionHTMLAttributes,
 } from "react";
 import styled from "styled-components";
 import { StyledLabel } from "@/presentation/common/components/_index";

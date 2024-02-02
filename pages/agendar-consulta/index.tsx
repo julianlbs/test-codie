@@ -4,16 +4,13 @@ import {
 	type StyledBreadCrumbsProps,
 	Head,
 	StyledHeader,
-} from "@/presentation/common/components/_index";
+} from "@presentation/common/components";
 import styled from "styled-components";
-import {
-	FormScheduling,
-	useScheduling,
-} from "../../presentation/features/_index";
-import container from "../../inversify.config";
-import { SchedulingUseCase } from "../../domain/_index";
-import { INVERSIFY_TYPES } from "../../infra/constants/inversify";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { FormScheduling } from "@presentation/features";
+import container from "@/inversify.config";
+import { SchedulingUseCase } from "@domain";
+import { INVERSIFY_TYPES } from "@/infra/constants/inversify";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
 const head = (
 	<Head

@@ -1,3 +1,3 @@
 export const ENV = {
-  PATH_NAME: process.env.NEXT_PUBLIC_PATHNAME
+  SERVER_DOMAIN: process.env.NEXT_PUBLIC_DOMAIN
 };

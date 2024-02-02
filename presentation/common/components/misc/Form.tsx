@@ -1,7 +1,7 @@
+import type { FormHTMLAttributes } from "react";
 import styled from "styled-components";
 
-export interface StyledFormProps
-	extends React.FormHTMLAttributes<HTMLFormElement> {}
+export interface StyledFormProps extends FormHTMLAttributes<HTMLFormElement> {}
 
 function Form(props: StyledFormProps) {
 	return <form {...props} />;

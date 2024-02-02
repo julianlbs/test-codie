@@ -4,6 +4,7 @@ import { useWindowSize } from "@/presentation/common/hooks/_index";
 import StyledNavMenuMobile from "./NavMenuMobile";
 import StyledNavMenuDesktop from "./NavMenuDesktop";
 import { type StyledNavMenuListItemsProps } from "./NavMenuItems";
+import { useRouter } from "next/router";
 
 interface NavMenuProps
 	extends Omit<React.HTMLAttributes<HTMLElement>, "children"> {
@@ -30,7 +31,6 @@ function NavMenu(props: StyledNavMenuProps) {
 		);
 	}
 
-	// TODO: Maybe it's possible to get the user device from the hook userAgent before rendering the component!!
 	return <></>;
 }
 

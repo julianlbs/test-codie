@@ -2,7 +2,7 @@ import {
 	default as NextLink,
 	type LinkProps as NextLinkProps,
 } from "next/link";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import styled from "styled-components";
 
 export interface StyledLinkProps extends NextLinkProps {

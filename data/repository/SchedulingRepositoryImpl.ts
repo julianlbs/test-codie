@@ -20,7 +20,7 @@ export class SchedulingRepositoryImpl implements SchedulingRepository {
     return this.dataSource.getTime(date);
   }
 
-  async create(schedule: Schedule): Promise<IResponse<Schedule>> {
+  async create(schedule: Schedule): Promise<IResponse<Schedule | null>> {
     return this.dataSource.create(schedule);
   }
 }

@@ -1,9 +1,6 @@
-import React, { HTMLAttributes } from "react";
+import React, { type HTMLAttributes } from "react";
 import styled from "styled-components";
-import {
-	StyledButton,
-	WarningIcon,
-} from "../../../../common/components/_index";
+import { StyledButton, WarningIcon } from "@presentation/common/components";
 import { useRouter } from "next/router";
 
 interface StyleSchedulingErrorProps extends HTMLAttributes<HTMLDivElement> {

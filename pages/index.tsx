@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Head, StyledH1 } from "@/presentation/common/components/_index";
 import { MainLayout } from "@/presentation/layouts/_index";
-import React from "react";
 
 const DarkOverlay = styled.div`
 	position: absolute;

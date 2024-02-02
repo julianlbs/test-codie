@@ -1,4 +1,4 @@
-import { type HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import styled from "styled-components";
 
 export interface StyledDividerProps extends HTMLAttributes<HTMLHRElement> {}

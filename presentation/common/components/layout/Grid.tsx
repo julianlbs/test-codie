@@ -1,7 +1,7 @@
-import React from "react";
+import type { HTMLAttributes } from "react";
 import styled from "styled-components";
 
-export interface StyledGridProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface StyledGridProps extends HTMLAttributes<HTMLDivElement> {}
 
 function Grid(props: StyledGridProps) {
 	return <div {...props} />;

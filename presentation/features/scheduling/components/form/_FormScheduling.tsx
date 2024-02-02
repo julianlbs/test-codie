@@ -124,6 +124,12 @@ function FormScheduling(props: StyledFormSchedulingProps) {
 		clearErrors("pokemons");
 	};
 
+	const errorSelectPokemon = (index: number) => {
+		if (!Array.isArray(errors.pokemons)) return undefined;
+		const message = errors.pokemons[index]?.message;
+		return message;
+	};
+
 	const handleSelectDate = (e: ChangeEvent<HTMLSelectElement>) => {
 		timeQuery.mutateAsync(e.target.value);
 		setValue("date", e.target.value);
@@ -152,12 +158,6 @@ function FormScheduling(props: StyledFormSchedulingProps) {
 		}
 	};
 
-	const errorSelectPokemon = (index: number) => {
-		if (!Array.isArray(errors.pokemons)) return undefined;
-		const message = errors.pokemons[index]?.message;
-		return message;
-	};
-
 	useEffect(() => {
 		pokemonsQuery.refetch();
 	}, []);
@@ -168,6 +168,8 @@ function FormScheduling(props: StyledFormSchedulingProps) {
 			setShownContent("create");
 		}
 	}, [router.query]);
+
+	/* ----------------------------- RENDER CONTENT ----------------------------- */
 
 	if (shownContent === "success") {
 		return (
