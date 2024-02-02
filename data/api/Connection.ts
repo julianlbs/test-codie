@@ -27,7 +27,6 @@ export class Connection implements IConnection {
     } catch (err) {
       const error = err as AxiosError;
       return { data: null, status: (error.status ?? 500), statusText: error?.message };
-      // throw new Error(`Error ${error.status} - ${error.message}`);
     }
   }
 
@@ -38,7 +37,6 @@ export class Connection implements IConnection {
     } catch (err) {
       const error = err as AxiosError;
       return { data: null, status: (error.status ?? 500), statusText: error?.message };
-      // throw new Error(`Error ${error.status} - ${error.message}`);
     }
   }
 
