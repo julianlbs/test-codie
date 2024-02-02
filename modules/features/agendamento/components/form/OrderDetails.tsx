@@ -31,7 +31,6 @@ const StyledTaxText = styled(StyledText)`
 
 function OrderDetails(props: StyledOrderDetailsProps) {
 	const { price, pokemonQuantity, ...otherProps } = props;
-	console.log(price);
 	return (
 		<StyledVStack {...otherProps}>
 			<StyledDetailItem>

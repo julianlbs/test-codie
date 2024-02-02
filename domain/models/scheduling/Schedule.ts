@@ -10,7 +10,7 @@ export interface Schedule {
 }
 
 export interface Price {
-  currency: 'R$',
+  currency: string,
   pricePerPokemon: number;
   taxPercentage: number;
   subTotal: number;

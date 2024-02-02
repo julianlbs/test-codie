@@ -10,6 +10,7 @@ import {
 	StyledVStack,
 	StyledHStack,
 	DeleteButton,
+	StyledRequired,
 } from "@/modules/common/components";
 import ButtonAddPokemon from "./ButtonAddPokemon";
 import StyledOrderDetails from "./OrderDetails";
@@ -26,6 +27,8 @@ import { useForm } from "react-hook-form";
 import { formatCityName } from "../../utils";
 import { capitalizeText, formatCurrencyToBRL } from "@/modules/common/utils";
 import type { Schedule } from "@domain";
+import { schedulingSchema } from "./validation";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export interface StyledFormAgendamentoProps
 	extends Omit<FormHTMLAttributes<HTMLFormElement>, "type"> {
@@ -38,7 +41,16 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 	const { cities, citiesQuery, pokemonsQuery, timeList, timeQuery } =
 		useScheduling();
 
-	const { register, watch, setValue, getValues } = useForm<Schedule>({
+	const {
+		register,
+		watch,
+		formState: { errors },
+		setValue,
+		getValues,
+		handleSubmit,
+		clearErrors,
+	} = useForm<Schedule>({
+		resolver: yupResolver(schedulingSchema),
 		defaultValues: {
 			city: "",
 			date: "",
@@ -60,6 +72,7 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 	const handleSelectRegion = (e: ChangeEvent<HTMLSelectElement>) => {
 		citiesQuery.mutateAsync(e.target.value);
 		setValue("region", e.target.value);
+		clearErrors("region");
 	};
 
 	const handleSelectPokemon = (
@@ -69,12 +82,14 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 		const list = getValues("pokemons");
 		list[index] = e.target.value;
 		setValue("pokemons", list);
+		clearErrors("pokemons");
 	};
 
 	const handleAddPokemon = () => {
 		const list = getValues("pokemons");
 		setValue("pokemons", list.concat(""));
 		handleUpdatePrice();
+		clearErrors("pokemons");
 	};
 
 	const handleDeletePokemon = (index: number) => {
@@ -82,19 +97,32 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 		list.splice(index, 1);
 		setValue("pokemons", list);
 		handleUpdatePrice();
+		clearErrors("pokemons");
 	};
 
 	const handleSelectDate = (e: ChangeEvent<HTMLSelectElement>) => {
 		timeQuery.mutateAsync(e.target.value);
 		setValue("date", e.target.value);
+		clearErrors("date");
 	};
 
 	const handleUpdatePrice = () => {
 		const pokemons = getValues("pokemons");
 		const price = getValues("price");
 		const subTotal = pokemons.length * price.pricePerPokemon;
-		const total = subTotal * (1 + price.taxPercentage);
+		const total = +(subTotal * (1 + price.taxPercentage)).toFixed(2);
 		setValue("price", { ...price, subTotal, total });
+	};
+
+	const handleSubmitSchedule = (payload: Schedule) => {
+		console.log(payload);
+	};
+
+	const errorSelectPokemon = (index: number) => {
+		if (!Array.isArray(errors.pokemons)) return undefined;
+		const message = errors.pokemons[index]?.message;
+		console.log(message);
+		return message;
 	};
 
 	useEffect(() => {
@@ -102,7 +130,7 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 	}, []);
 
 	return (
-		<StyledForm {...otherProps}>
+		<StyledForm onSubmit={handleSubmit(handleSubmitSchedule)} {...otherProps}>
 			<StyledH2>
 				Preencha o formulário abaixo para agendar a sua consulta
 			</StyledH2>
@@ -112,17 +140,23 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 					label="Nome"
 					placeholder="Digite o nome"
 					{...register("name")}
+					required
+					error={errors.name?.message}
 				/>
 				<StyledTextInput
 					label="Sobrenome"
 					placeholder="Digite o seu sobrenome"
 					{...register("surName")}
+					required
+					error={errors.surName?.message}
 				/>
 				<StyledSelect
 					label="Região"
 					defaultValue=""
 					{...register("region")}
 					onChange={handleSelectRegion}
+					required
+					error={errors.region?.message}
 				>
 					<option value="" disabled>
 						Selecione a sua região
@@ -139,6 +173,8 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 					defaultValue=""
 					{...register("city")}
 					disabled={watch("region") === ""}
+					required
+					error={errors.city?.message}
 				>
 					<option value="" disabled>
 						Selecione a sua cidade
@@ -152,26 +188,34 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 			</StyledGrid>
 
 			<StyledVStack gap="0.4rem">
-				<StyledSectionTitle>Cadastre seu time</StyledSectionTitle>
+				<StyledSectionTitle>
+					Cadastre seu time <StyledRequired>*</StyledRequired>
+				</StyledSectionTitle>
 				<StyledDescription>Atendemos até 06 pokémons por vez</StyledDescription>
+				{/* {(errors?.pokemons ?? {})["message"] ? (
+					<StyledError>{errors.pokemons?.message}</StyledError>
+				) : null} */}
 			</StyledVStack>
 			<StyledGrid>
 				{/* TODO: Make field searchable */}
-				{watch("pokemons").map((name, index) => (
+				{watch("pokemons")?.map((name, index) => (
 					<StyledHStack key={name + index}>
 						<DeleteButton onClick={() => handleDeletePokemon(index)} />
 						<StyledSelect
+							name={name + index}
 							label={`Pokemón ${index + 1}`}
 							defaultValue={name}
 							direction="horizontal"
-							{...register("pokemons")}
 							onChange={(e) => handleSelectPokemon(e, index)}
+							error={errorSelectPokemon(index)}
 						>
 							<option value="" disabled>
-								Selecione o pokémon
+								Selecione um pokémon
 							</option>
 							{name !== "" ? (
-								<option value={name}>{capitalizeText(name)}</option>
+								<option value={name}>
+									{capitalizeText(name) ?? "Selecione um pokémon"}
+								</option>
 							) : null}
 							{pokemonsQuery.data
 								.filter((el) => el.name !== name)
@@ -194,6 +238,8 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 					label="Data para Atendimento"
 					{...register("date")}
 					onChange={handleSelectDate}
+					required
+					error={errors.date?.message}
 				>
 					<option value="" disabled>
 						Selecione uma data
@@ -209,6 +255,8 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 					defaultValue=""
 					label="Horário de Atendimento"
 					{...register("time")}
+					required
+					error={errors.time?.message}
 				>
 					<option value="" disabled>
 						Selecione um horário
@@ -232,7 +280,7 @@ function FormAgendamento(props: StyledFormAgendamentoProps) {
 				<StyledTotalPrice>
 					Valor Total {formatCurrencyToBRL(watch("price")?.total)}
 				</StyledTotalPrice>
-				<StyledButton>Concluir Agendamento</StyledButton>
+				<StyledButton type="submit">Concluir Agendamento</StyledButton>
 			</ContainerSubmitOrder>
 		</StyledForm>
 	);
