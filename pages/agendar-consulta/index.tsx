@@ -70,8 +70,10 @@ export const getServerSideProps = (async () => {
 	const schedulingUseCase = container.get<SchedulingUseCase>(
 		INVERSIFY_TYPES.SchedulingUseCase
 	);
-	const regions = await schedulingUseCase.getRegions();
-	const dates = await schedulingUseCase.getDates();
+	const [regions, dates] = await Promise.all([
+		schedulingUseCase.getRegions(),
+		schedulingUseCase.getDates(),
+	]);
 
 	return { props: { regions, dates } };
 }) satisfies GetServerSideProps<{
